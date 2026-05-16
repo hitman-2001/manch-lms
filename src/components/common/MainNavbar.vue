@@ -102,7 +102,6 @@ export default {
         { name: "Study Material", path: "/study-material" },
         { name: "Gallery", path: "/gallery" },
         { name: "Results", path: "/results" },
-        { name: "Lectures", path: "/lectures" },
       ],
     };
   },

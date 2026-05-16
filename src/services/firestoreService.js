@@ -1,7 +1,7 @@
 // ============================================================
 // Firestore Service — CRUD for all collections
 // ============================================================
-// Collections: gallery | materials | lectures | enquiries | registrations
+// Collections: gallery | materials | enquiries | registrations
 // ============================================================
 
 import {
@@ -163,56 +163,6 @@ export const updateFaculty = async (docId, updates) => {
  */
 export const deleteFaculty = async (docId) => {
   await deleteDoc(doc(db, "faculty", docId));
-};
-
-// ─── LECTURES ───────────────────────────────────────────────
-
-/**
- * Add a lecture to Firestore.
- * @param {{ subject, teacher, date, startTime, endTime, class: string }} data
- * @returns {Promise<DocumentReference>}
- */
-export const addLecture = async (lectureData) => {
-  return await addDoc(collection(db, "lectures"), {
-    ...lectureData,
-    createdAt: serverTimestamp(),
-  });
-};
-
-/**
- * Update an existing lecture.
- * @param {string} docId
- * @param {Object} updates
- * @returns {Promise<void>}
- */
-export const updateLecture = async (docId, updates) => {
-  const lectureRef = doc(db, "lectures", docId);
-  await updateDoc(lectureRef, { ...updates, updatedAt: serverTimestamp() });
-};
-
-/**
- * Delete a lecture.
- * @param {string} docId
- * @returns {Promise<void>}
- */
-export const deleteLecture = async (docId) => {
-  await deleteDoc(doc(db, "lectures", docId));
-};
-
-/**
- * Subscribe to real-time lecture updates (onSnapshot).
- * @param {Function} callback - Called with array of lectures on any change
- * @returns {Function} unsubscribe function — call it to stop listening
- */
-export const subscribeToLectures = (callback) => {
-  const q = query(collection(db, "lectures"), orderBy("date", "asc"));
-  return onSnapshot(q, (snapshot) => {
-    const lectures = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    callback(lectures);
-  });
 };
 
 // ─── ENQUIRIES ──────────────────────────────────────────────

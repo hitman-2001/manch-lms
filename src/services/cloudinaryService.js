@@ -37,7 +37,7 @@ const ALLOWED_MATERIAL_TYPES = [
  * @returns {{ valid: boolean, error: string|null }}
  */
 export const validateFile = (file, type = "image") => {
-  const maxSizes = { image: 5, material: 20 }; // MB
+  const maxSizes = { image: 40, material: 40 }; // MB (40MB limit)
   const allowedTypes =
     type === "image" ? ALLOWED_IMAGE_TYPES : ALLOWED_MATERIAL_TYPES;
   const maxMB = maxSizes[type];
@@ -61,28 +61,74 @@ export const validateFile = (file, type = "image") => {
   return { valid: true, error: null };
 };
 
-// ─── Upload ────────────────────────────────────────────────
+/**
+ * Client-side image compression using Canvas.
+ * Resizes to max 1920px width/height and reduces quality.
+ */
+const compressImage = async (file) => {
+  if (!file.type.startsWith("image/")) return file;
+
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 1920;
+        const MAX_HEIGHT = 1080;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            const compressedFile = new File([blob], file.name, {
+              type: "image/jpeg",
+              lastModified: Date.now(),
+            });
+            resolve(compressedFile);
+          },
+          "image/jpeg",
+          0.8,
+        );
+      };
+    };
+  });
+};
 
 /**
  * Upload a file directly to Cloudinary from the browser.
  * Uses XHR for real progress tracking.
- *
- * PDFs → /raw/upload  (served with correct Content-Type: application/pdf)
- * Images → /image/upload (optimized CDN delivery)
- *
- * @param {File} file - The file to upload
- * @param {Function} onProgress - Called with 0-100 progress percentage
- * @returns {Promise<string>} - Cloudinary secure_url (CDN URL)
  */
-export const uploadToCloudinary = (file, onProgress = null) => {
+export const uploadToCloudinary = async (file, onProgress = null) => {
+  // Compress images before upload to save bandwidth and stay under limits
+  const fileToUpload = file.type.startsWith("image/")
+    ? await compressImage(file)
+    : file;
+
   return new Promise((resolve, reject) => {
-    // Using /image/upload for all files — /raw/upload requires special
-    // unsigned preset permissions that are not enabled by default.
-    // Modern browsers render PDFs from image/upload URLs natively in iframes.
-    const uploadUrl = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+    const uploadUrl = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", fileToUpload);
     formData.append("upload_preset", UPLOAD_PRESET);
 
     const xhr = new XMLHttpRequest();

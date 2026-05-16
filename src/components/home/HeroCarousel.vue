@@ -1,50 +1,45 @@
 <template>
-  <div class="relative bg-blue-900 h-[500px] overflow-hidden" @mouseenter="stopAutoPlay" @mouseleave="startAutoPlay">
+  <div class="relative bg-[#0a0f1a] h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] overflow-hidden mt-4 md:mt-0" @mouseenter="stopAutoPlay" @mouseleave="startAutoPlay">
     <!-- Carousel Track -->
     <div 
       class="whitespace-nowrap h-full" 
-      :class="{ 'transition-transform duration-700 ease-in-out': !isSnapping }"
+      :class="{ 'transition-transform duration-1000 cubic-bezier(0.4, 0, 0.2, 1)': !isSnapping }"
       :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
       @transitionend="handleTransitionEnd"
     >
-      <div v-for="(slide, index) in displaySlides" :key="index" class="inline-block w-full h-full relative">
-        <!-- Placeholder for background image -->
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-800 opacity-90"></div>
-        
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="text-center px-4 max-w-4xl mx-auto whitespace-normal">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">
-              {{ slide.tagline }}
-            </h1>
-            <p class="text-xl text-blue-100 mb-8 font-medium">
-              {{ slide.subtext }}
-            </p>
-            <div class="space-x-4">
-              <router-link to="/admission" class="bg-secondary hover:bg-secondary-dark text-white px-8 py-3 rounded-full font-bold transition-colors inline-block shadow-lg">
-                Join Us Today
-              </router-link>
-              <router-link to="/courses" class="bg-white hover:bg-gray-100 text-primary-dark px-8 py-3 rounded-full font-bold transition-colors inline-block shadow-lg">
-                Explore Courses
-              </router-link>
-            </div>
-          </div>
+      <div v-for="(slide, index) in displaySlides" :key="index" class="inline-block w-full h-full relative group">
+        <!-- Blurred Background Layer -->
+        <div class="absolute inset-0 overflow-hidden">
+          <img :src="slide.image" class="w-full h-full object-cover blur-2xl scale-110 opacity-30" alt="" aria-hidden="true" />
+          <div class="absolute inset-0 bg-gradient-to-b from-[#0a0f1a]/40 via-transparent to-[#0a0f1a]/80"></div>
+        </div>
+
+        <!-- Main Poster Image -->
+        <div class="relative w-full h-full flex items-center justify-center p-1 sm:p-4 md:p-8 lg:p-12">
+          <img 
+            :src="slide.image" 
+            class="max-w-full max-h-full object-contain shadow-2xl rounded-xl transition-transform duration-700 group-hover:scale-[1.02]" 
+            alt="Carousel Slide" 
+          />
         </div>
       </div>
     </div>
 
     <!-- Carousel Controls -->
-    <button @click="prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white z-10">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    <button @click="prev" class="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 rounded-full p-3 text-white z-20 transition-all duration-300 group/btn">
+      <svg class="w-6 h-6 md:w-8 md:h-8 transition-transform group-hover/btn:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
     </button>
-    <button @click="next" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white z-10">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    <button @click="next" class="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 rounded-full p-3 text-white z-20 transition-all duration-300 group/btn">
+      <svg class="w-6 h-6 md:w-8 md:h-8 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
     </button>
 
     <!-- Navigation Dots -->
-    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
       <button v-for="(slide, index) in slides" :key="'dot'+index" 
         @click="goToSlide(index)"
-        :class="['w-3 h-3 rounded-full transition-colors', activeDot === index ? 'bg-secondary' : 'bg-white/50']">
+        class="group relative py-2"
+      >
+        <div :class="['h-1.5 rounded-full transition-all duration-500', activeDot === index ? 'w-8 bg-white' : 'w-2 bg-white/30 group-hover:bg-white/50']"></div>
       </button>
     </div>
   </div>
@@ -55,21 +50,21 @@ export default {
   name: 'HeroCarousel',
   data() {
     return {
-      currentSlide: 1, // Start at the first real slide (index 1 in displaySlides)
+      currentSlide: 1,
       isSnapping: false,
       interval: null,
       slides: [
-        { tagline: 'Nurturing Creative Innovators of Tomorrow', subtext: 'Welcome to Manch, where interactive learning meets well-rounded growth' },
-        { tagline: 'Excellence in NEET & JEE', subtext: 'Expert faculty and comprehensive study material' },
-        { tagline: 'Strong Foundation from 8th Grade', subtext: 'Building concepts early for a brighter future' },
-        { tagline: 'Achieve Beyond Academics', subtext: 'Fostering overall personality development' }
+        { image: new URL('../../assets/carousel/slide1.png', import.meta.url).href },
+        { image: new URL('../../assets/carousel/slide2.png', import.meta.url).href },
+        { image: new URL('../../assets/carousel/slide3.png', import.meta.url).href },
+        { image: new URL('../../assets/carousel/slide4.png', import.meta.url).href },
+        { image: new URL('../../assets/carousel/slide5.png', import.meta.url).href }
       ]
     }
   },
   computed: {
     displaySlides() {
       if (this.slides.length === 0) return [];
-      // [Last Slide Clone, Slide 1, Slide 2, Slide 3, Slide 4, First Slide Clone]
       return [
         this.slides[this.slides.length - 1],
         ...this.slides,
@@ -77,7 +72,6 @@ export default {
       ];
     },
     activeDot() {
-      // Map currentSlide (1 to length) to dot index (0 to length-1)
       if (this.currentSlide === 0) return this.slides.length - 1;
       if (this.currentSlide > this.slides.length) return 0;
       return this.currentSlide - 1;
@@ -97,17 +91,13 @@ export default {
       this.currentSlide = index + 1;
     },
     handleTransitionEnd() {
-      // If we reached the end clone (First Slide Clone)
       if (this.currentSlide >= this.displaySlides.length - 1) {
         this.isSnapping = true;
         this.currentSlide = 1;
-        // Wait for next tick to re-enable transitions
         this.$nextTick(() => {
-          // forcing reflow might be needed in some browsers, but Vue's reactive update usually handles it
           setTimeout(() => { this.isSnapping = false; }, 50);
         });
       }
-      // If we reached the beginning clone (Last Slide Clone)
       else if (this.currentSlide <= 0) {
         this.isSnapping = true;
         this.currentSlide = this.slides.length;
@@ -118,7 +108,7 @@ export default {
     },
     startAutoPlay() {
       this.stopAutoPlay();
-      this.interval = setInterval(this.next, 5000);
+      this.interval = setInterval(this.next, 3000);
     },
     stopAutoPlay() {
       if (this.interval) {

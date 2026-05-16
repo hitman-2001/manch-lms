@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <aside class="w-64 bg-white shadow-lg flex flex-col fixed inset-y-0 left-0 z-30">
       <!-- Logo -->
-      <div class="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-blue-700 to-blue-600">
+      <router-link to="/" class="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-blue-700 to-blue-600 block hover:opacity-90 transition-opacity">
         <div class="flex items-center gap-3">
           <div class="h-9 w-9 rounded-lg bg-white/20 flex items-center justify-center">
             <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -16,7 +16,7 @@
             <p class="text-blue-200 text-xs">Admin Panel</p>
           </div>
         </div>
-      </div>
+      </router-link>
 
       <!-- Nav links -->
       <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
@@ -95,7 +95,7 @@ const NAV_ICONS = {
   gallery: `<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>`,
   materials: `<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>`,
   faculty: `<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`,
-  lectures: `<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>`,
+  results: `<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
 }
 
 export default {
@@ -119,7 +119,7 @@ export default {
         { to: '/admin/gallery', label: 'Gallery', icon: NAV_ICONS.gallery },
         { to: '/admin/materials', label: 'Study Materials', icon: NAV_ICONS.materials },
         { to: '/admin/faculty', label: 'Faculty', icon: NAV_ICONS.faculty },
-        { to: '/admin/lectures', label: 'Lectures', icon: NAV_ICONS.lectures }
+        { to: '/admin/results', label: 'Results', icon: NAV_ICONS.results },
       ]
     }
   },
@@ -136,7 +136,7 @@ export default {
         '/admin/gallery': 'Gallery Management',
         '/admin/materials': 'Study Materials',
         '/admin/faculty': 'Faculty Management',
-        '/admin/lectures': 'Lecture Planner'
+        '/admin/results': 'Results Management',
       }
       return titles[this.$route.path] || 'Admin Panel'
     }

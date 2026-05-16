@@ -98,7 +98,7 @@
                     <span class="text-blue-600 font-medium">browse</span>
                   </p>
                   <p class="text-xs text-gray-400 mt-1">
-                    JPG, PNG, WebP, GIF • Max 5MB
+                    JPG, PNG, WebP, GIF • Max 40MB
                   </p>
                 </div>
                 <div v-else class="relative">
