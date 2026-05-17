@@ -3,7 +3,9 @@
     class="bg-[#0a0f1a] text-white pt-12 md:pt-16 pb-8 border-t border-gray-800/50"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 mb-10 md:mb-12">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 mb-10 md:mb-12"
+      >
         <!-- Brand Section (Col 3) -->
         <div class="lg:col-span-3 space-y-5 md:space-y-6">
           <router-link
@@ -16,7 +18,9 @@
               class="h-10 md:h-12 lg:h-14 w-auto"
             />
           </router-link>
-          <p class="text-gray-400 text-xs md:text-sm leading-relaxed pr-0 md:pr-4">
+          <p
+            class="text-gray-400 text-xs md:text-sm leading-relaxed pr-0 md:pr-4"
+          >
             Nurturing Creative Innovators of Tomorrow. We provide an interactive
             learning environment focused on academic excellence and well-rounded
             growth.
@@ -55,7 +59,9 @@
           >
             Navigation
           </h3>
-          <ul class="grid grid-cols-2 lg:grid-cols-1 gap-x-4 gap-y-3.5 text-[12px] md:text-[13px] text-gray-400">
+          <ul
+            class="grid grid-cols-2 lg:grid-cols-1 gap-x-4 gap-y-3.5 text-[12px] md:text-[13px] text-gray-400"
+          >
             <li>
               <router-link
                 to="/about"
@@ -143,11 +149,14 @@
                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                   />
                 </svg>
-                <span class="text-[11px] md:text-xs font-bold uppercase tracking-wider"
+                <span
+                  class="text-[11px] md:text-xs font-bold uppercase tracking-wider"
                   >Vasai East</span
                 >
               </div>
-              <p class="text-[11px] md:text-[12px] text-gray-400 leading-relaxed font-medium">
+              <p
+                class="text-[11px] md:text-[12px] text-gray-400 leading-relaxed font-medium"
+              >
                 Office no. 8,7,6,5,4,2,1, Vimal Accord, Near fire brigade,
                 Agarwal Circle, Vasai East, Palghar 401208.
               </p>
@@ -168,11 +177,14 @@
                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                   />
                 </svg>
-                <span class="text-[11px] md:text-xs font-bold uppercase tracking-wider"
+                <span
+                  class="text-[11px] md:text-xs font-bold uppercase tracking-wider"
                   >Vasai West</span
                 >
               </div>
-              <p class="text-[11px] md:text-[12px] text-gray-400 leading-relaxed font-medium">
+              <p
+                class="text-[11px] md:text-[12px] text-gray-400 leading-relaxed font-medium"
+              >
                 Office no. 302, D'Almeida Landmark, Manikpur, Near Hanuman
                 Mandir, Vasai West 401202.
               </p>
@@ -193,11 +205,14 @@
                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                   />
                 </svg>
-                <span class="text-[11px] md:text-xs font-bold uppercase tracking-wider"
+                <span
+                  class="text-[11px] md:text-xs font-bold uppercase tracking-wider"
                   >Nallasopara</span
                 >
               </div>
-              <p class="text-[11px] md:text-[12px] text-gray-400 leading-relaxed font-medium">
+              <p
+                class="text-[11px] md:text-[12px] text-gray-400 leading-relaxed font-medium"
+              >
                 Office no. 1-6, first floor, Kartikiya paradise, Road no. 2,
                 Sriprastha, Nallasopara West.
               </p>
@@ -228,7 +243,7 @@
               +91 8830000914
             </a>
             <a
-              href="mailto:info@manchclasses.com"
+              href="mailto:contact@manchclasses.com"
               class="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-300 hover:text-secondary transition-colors"
             >
               <svg
@@ -244,23 +259,23 @@
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              info@manchclasses.com
+              contact@manchclasses.com
             </a>
           </div>
         </div>
       </div>
 
       <div
-        class="pt-6 md:pt-8 border-t border-gray-800/50 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] md:text-[11px] text-gray-500 font-semibold tracking-wider uppercase text-center md:text-left"
+        class="pt-6 md:pt-8 border-t border-gray-800/50 flex flex-col justify-center items-center gap-4 text-[10px] md:text-[11px] text-gray-500 font-semibold tracking-wider uppercase text-center"
       >
         <p>
           &copy; {{ new Date().getFullYear() }} Manch Science Classes.
           Intelligence meets Innovation.
         </p>
-        <div class="flex gap-6 md:gap-8 text-[10px]">
+        <!-- <div class="flex gap-6 md:gap-8 text-[10px]">
           <a href="#" class="hover:text-white transition-colors">Privacy</a>
           <a href="#" class="hover:text-white transition-colors">Terms</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </footer>

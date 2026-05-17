@@ -32,14 +32,14 @@
             <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Achievements</span>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="flex flex-wrap gap-8" :class="yearGroup.items.length <= 3 ? 'justify-center' : 'justify-start'">
             <div
               v-for="result in yearGroup.items"
               :key="result.id"
-              class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col"
+              class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col"
             >
               <!-- Poster Image Container -->
-              <div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
+              <div class="relative aspect-[4/5] overflow-hidden bg-gray-100 cursor-pointer" @click="expandImage(result.imageUrl)">
                 <img
                   :src="result.imageUrl"
                   :alt="result.description || 'Result Poster'"
@@ -49,12 +49,15 @@
                 <!-- Overlay Gradient -->
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
                 
-                <!-- Category Badge -->
-                <div class="absolute top-4 left-4">
-                  <span class="px-3 py-1 bg-white/90 backdrop-blur-md text-primary text-[10px] font-black uppercase tracking-wider rounded-full shadow-sm">
-                    {{ result.category }}
-                  </span>
+                <!-- Hover Zoom Icon -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
+                  <div class="bg-white/20 backdrop-blur-md p-4 rounded-full text-white shadow-lg transform scale-50 group-hover:scale-100 transition-transform duration-500 delay-75">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                    </svg>
+                  </div>
                 </div>
+                
               </div>
 
               <!-- Content Area -->
@@ -90,6 +93,26 @@
         <p class="text-gray-500 text-sm">We are currently updating our hall of fame. Please check back soon!</p>
       </div>
     </div>
+
+    <!-- Image Expansion Modal -->
+    <div 
+      v-if="expandedImage" 
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 backdrop-blur-sm transition-opacity duration-300"
+      @click="expandedImage = null"
+    >
+      <button 
+        class="absolute top-4 right-4 md:top-8 md:right-8 text-white/50 hover:text-white transition-colors"
+        @click="expandedImage = null"
+      >
+        <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <img 
+        :src="expandedImage" 
+        class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] transform transition-transform duration-300 scale-100"
+        @click.stop
+        alt="Expanded Result"
+      />
+    </div>
   </div>
 </template>
 
@@ -101,7 +124,8 @@ export default {
   data() {
     return {
       results: [],
-      loading: true
+      loading: true,
+      expandedImage: null
     }
   },
   computed: {
@@ -126,6 +150,9 @@ export default {
     await this.fetchResults()
   },
   methods: {
+    expandImage(url) {
+      if (url) this.expandedImage = url;
+    },
     async fetchResults() {
       this.loading = true
       try {

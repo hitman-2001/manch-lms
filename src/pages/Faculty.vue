@@ -56,11 +56,12 @@
       </div>
 
       <!-- Faculty Grid -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div v-else class="flex flex-wrap gap-8" :class="(isAdmin ? faculty.length + 1 : faculty.length) <= 3 ? 'justify-center' : 'justify-start'">
         <!-- Faculty Card -->
         <div
           v-for="member in faculty"
           :key="member.id"
+          class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]"
           :class="[
             'bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-200',
             isAdmin
@@ -304,7 +305,7 @@
           v-if="isAdmin"
           @click="addNewMember"
           :class="[
-            'border-2 border-dashed rounded-2xl flex flex-col items-center justify-center h-72 cursor-pointer transition-all',
+            'w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] border-2 border-dashed rounded-2xl flex flex-col items-center justify-center h-72 cursor-pointer transition-all',
             adding
               ? 'border-amber-400 bg-amber-50'
               : 'border-gray-300 hover:border-amber-400 hover:bg-amber-50/50',
