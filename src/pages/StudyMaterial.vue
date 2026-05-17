@@ -647,6 +647,7 @@ export default {
         "English",
         "Marathi",
         "Social Studies",
+        "Hindi",
         "History/Civics",
         "Geography",
         "General",
