@@ -75,7 +75,7 @@
                   Drag & drop or <span class="text-blue-600 font-medium">browse</span>
                 </p>
                 <p v-else class="text-sm text-blue-600 font-medium">{{ form.file.name }}</p>
-                <p class="text-xs text-gray-400 mt-1">PDF, JPG, PNG, WebP • Max 40MB</p>
+                <p class="text-xs text-gray-400 mt-1">PDF (Max 15MB) • Images (Max 40MB)</p>
               </div>
               <p v-if="fileError" class="text-xs text-red-500 mt-1">{{ fileError }}</p>
             </div>

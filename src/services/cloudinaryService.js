@@ -51,10 +51,12 @@ export const validateFile = (file, type = "image") => {
   }
 
   const sizeMB = file.size / (1024 * 1024);
-  if (sizeMB > maxMB) {
+  const isPdf = file.type === "application/pdf";
+  const limitMB = isPdf ? 15 : maxMB;
+  if (sizeMB > limitMB) {
     return {
       valid: false,
-      error: `File too large. Max ${maxMB}MB. (Current: ${sizeMB.toFixed(1)}MB)`,
+      error: `File too large. Max ${limitMB}MB${isPdf ? " for PDF files" : ""}. (Current: ${sizeMB.toFixed(1)}MB)`,
     };
   }
 
