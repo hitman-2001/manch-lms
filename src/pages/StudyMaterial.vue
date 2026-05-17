@@ -111,15 +111,13 @@
             </option>
           </select>
 
-          <select
+          <input
             v-model="upload.subject"
+            type="text"
+            placeholder="Subject Name *"
+            required
             class="px-3 py-2 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-400"
-          >
-            <option value="">Subject *</option>
-            <option v-for="sub in subjects" :key="sub" :value="sub">
-              {{ sub }}
-            </option>
-          </select>
+          />
 
           <label
             class="flex items-center justify-center gap-2 px-3 py-2 border-2 border-dashed border-gray-300 rounded-xl text-sm text-gray-500 cursor-pointer hover:border-amber-400 hover:bg-amber-50 transition"
@@ -281,15 +279,13 @@
                 {{ std }}
               </option>
             </select>
-            <select
+            <input
               :value="mat.subject"
-              @change="saveMatField(mat, 'subject', $event.target.value)"
-              class="text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-amber-300 focus:outline-none transition flex-1"
-            >
-              <option v-for="sub in subjects" :key="sub" :value="sub">
-                {{ sub }}
-              </option>
-            </select>
+              @blur="saveMatField(mat, 'subject', $event.target.value)"
+              @keyup.enter="saveMatField(mat, 'subject', $event.target.value)"
+              placeholder="Subject Name"
+              class="text-xs text-gray-600 bg-transparent border-b border-transparent hover:border-amber-300 focus:border-amber-400 focus:outline-none transition flex-1"
+            />
           </div>
           <p v-else class="text-gray-500 text-sm mb-1 flex-grow">
             <span class="font-medium text-gray-700">🎓 {{ mat.standard }}</span>
@@ -638,20 +634,6 @@ export default {
         "MHT-CET",
         "Other",
       ],
-      subjects: [
-        "Physics",
-        "Chemistry",
-        "Mathematics",
-        "Biology",
-        "Science",
-        "English",
-        "Marathi",
-        "Social Studies",
-        "Hindi",
-        "History/Civics",
-        "Geography",
-        "General",
-      ],
       // Upload form
       upload: {
         title: "",
@@ -686,13 +668,13 @@ export default {
       });
     },
     availableSubjects() {
-      if (this.activeStandard === "All") return ["All", ...this.subjects];
-      // Get subjects that actually have content for this standard
-      const subsInStd = this.allMaterials
-        .filter((m) => m.standard === this.activeStandard)
-        .map((m) => m.subject);
-      const uniqueSubs = [...new Set(subsInStd)].sort();
-      return uniqueSubs.length > 0 ? ["All", ...uniqueSubs] : ["All"];
+      const materialsToFilter = this.activeStandard === "All"
+        ? this.allMaterials
+        : this.allMaterials.filter((m) => m.standard === this.activeStandard);
+      
+      const subs = materialsToFilter.map((m) => m.subject).filter(Boolean);
+      const uniqueSubs = [...new Set(subs)].sort();
+      return ["All", ...uniqueSubs];
     },
   },
 

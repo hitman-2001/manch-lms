@@ -53,17 +53,14 @@
                 class="block text-sm font-medium text-gray-700 mb-1.5"
                 >Subject <span class="text-red-500">*</span></label
               >
-              <select
+              <input
                 id="material-subject"
                 v-model="form.subject"
+                type="text"
+                placeholder="e.g., Physics, Chemistry, Biology"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              >
-                <option value="" disabled>Select subject</option>
-                <option v-for="sub in subjects" :key="sub" :value="sub">
-                  {{ sub }}
-                </option>
-              </select>
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              />
             </div>
 
             <!-- File -->
@@ -411,20 +408,6 @@ export default {
         "JEE",
         "MHT-CET",
         "Other",
-      ],
-      subjects: [
-        "Physics",
-        "Chemistry",
-        "Mathematics",
-        "Biology",
-        "Science",
-        "English",
-        "Marathi",
-        "Social Studies",
-        "Hindi",
-        "History/Civics",
-        "Geography",
-        "General",
       ],
     };
   },
