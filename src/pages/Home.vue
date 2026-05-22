@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <HeroCarousel />
-    <StatsSection />
+    <!-- <StatsSection /> -->
     <AboutPreview />
     <CourseCardsSection />
     <!-- Other sections like News, Gallery Preview, Testimonials, Contact can be added here -->
@@ -9,18 +9,18 @@
 </template>
 
 <script>
-import HeroCarousel from '../components/home/HeroCarousel.vue';
-import StatsSection from '../components/home/StatsSection.vue';
-import AboutPreview from '../components/home/AboutPreview.vue';
-import CourseCardsSection from '../components/home/CourseCardsSection.vue';
+import HeroCarousel from "../components/home/HeroCarousel.vue";
+// import StatsSection from '../components/home/StatsSection.vue';
+import AboutPreview from "../components/home/AboutPreview.vue";
+import CourseCardsSection from "../components/home/CourseCardsSection.vue";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   components: {
     HeroCarousel,
-    StatsSection,
+    // StatsSection,
     AboutPreview,
-    CourseCardsSection
-  }
-}
+    CourseCardsSection,
+  },
+};
 </script>
