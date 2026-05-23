@@ -3,16 +3,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col lg:flex-row items-center gap-12">
         <div class="w-full lg:w-1/2">
-          <!-- Video Placeholder -->
-          <div class="aspect-video bg-gray-200 rounded-lg flex items-center justify-center relative overflow-hidden shadow-lg">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <button class="bg-primary/90 hover:bg-primary text-white rounded-full p-4 transition-transform transform hover:scale-110 shadow-xl">
-                <svg class="h-10 w-10 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                </svg>
-              </button>
-            </div>
-            <span class="text-gray-500 font-medium">Video Placeholder</span>
+          <!-- Video Embed -->
+          <div class="aspect-video rounded-lg overflow-hidden shadow-lg bg-black">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/Un5OYE5HTHU"
+              title="Welcome to Manch Science Classes"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
         
