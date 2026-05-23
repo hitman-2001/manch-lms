@@ -13,7 +13,7 @@
             class="bg-black p-2.5 inline-block rounded-xl shadow-2xl border border-gray-800 hover:border-primary transition-all duration-300"
           >
             <img
-              src="@/assets/logo.svg"
+              src="@/assets/header-icon.png"
               alt="Manch Science Classes"
               class="h-10 md:h-12 lg:h-14 w-auto"
             />
