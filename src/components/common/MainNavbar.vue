@@ -5,12 +5,13 @@
         <div class="flex items-center">
           <router-link to="/" class="flex-shrink-0 flex items-center py-1">
             <img
-              src="@/assets/logo.svg"
-              alt="Manch Science Classes"
-              class="h-16 w-auto"
+            src="@/assets/manch_logo.jfif"
+            alt="Manch Science Classes"
+            class="h-16 w-auto"
             />
           </router-link>
         </div>
+        <!-- src="@/assets/logo.svg" -->
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-6">
