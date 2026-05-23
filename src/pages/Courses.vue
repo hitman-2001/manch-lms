@@ -38,7 +38,7 @@ export default {
     return {
       courses: [
         {
-          title: "8th - 9th Foundation",
+          title: "8th - 10th Foundation",
           tag: "Foundation Batch",
           category: "School Curriculum",
           description: "Nurturing young minds to build a rock-solid conceptual base for NTSE, Olympiads, and future competitive engineering/medical exams.",
@@ -50,7 +50,7 @@ export default {
           ],
         },
         {
-          title: "10th Boards (SSC & CBSE)",
+          title: "8th - 10th Boards (SSC, CBSE & ICSE)",
           tag: "Board Masterclass",
           category: "Secondary Education",
           description: "Targeted, high-yield coaching to help students achieve top scores in board examinations with comprehensive syllabus coverage and strategies.",
