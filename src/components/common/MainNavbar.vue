@@ -23,6 +23,52 @@
           >
             {{ link.name }}
           </router-link>
+
+          <!-- PayFees Dropdown -->
+          <div class="relative group">
+            <button
+              class="flex items-center text-gray-600 hover:text-primary transition-colors duration-200 font-medium focus:outline-none py-2"
+            >
+              <span>PayFees</span>
+              <svg
+                class="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            
+            <!-- Dropdown Menu -->
+            <div
+              class="absolute right-0 mt-1 w-56 bg-white border border-gray-100 rounded-lg shadow-xl py-1.5 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform scale-95 group-hover:scale-100 origin-top-right"
+            >
+              <a
+                href="https://app.jodo.in/manch"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
+              >
+                Parent Login
+              </a>
+              <div class="h-px bg-gray-100 my-1"></div>
+              <a
+                href="https://dashboard.jodo.in/login?next=%2Fdashboard%3Ffilters%3DcGFnZT0lMkY%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
+              >
+                Manch Login (Staff)
+              </a>
+            </div>
+          </div>
+
           <router-link
             to="/admission"
             class="bg-secondary hover:bg-secondary-dark text-white px-4 py-2 rounded-md font-semibold transition-colors duration-200 shadow-sm"
@@ -76,10 +122,36 @@
         >
           {{ link.name }}
         </router-link>
+
+        <!-- PayFees Mobile Links -->
+        <div class="border-t border-gray-100 pt-2 mt-2">
+          <div class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+            PayFees
+          </div>
+          <a
+            href="https://app.jodo.in/manch"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="closeMobileMenu"
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+          >
+            Parent Login
+          </a>
+          <a
+            href="https://dashboard.jodo.in/login?next=%2Fdashboard%3Ffilters%3DcGFnZT0lMkY%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="closeMobileMenu"
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+          >
+            Manch Login (Staff)
+          </a>
+        </div>
+
         <router-link
           to="/admission"
           @click="closeMobileMenu"
-          class="block w-full text-left px-3 py-2 text-base font-medium bg-secondary text-white rounded-md mt-2"
+          class="block w-full text-left px-3 py-2 text-base font-medium bg-secondary text-white rounded-md mt-2 text-center"
         >
           Admissions
         </router-link>
