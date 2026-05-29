@@ -25,6 +25,15 @@
             {{ link.name }}
           </router-link>
 
+          <a
+            href="https://manchclasses.theonlinetests.com/dynamicwl/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-600 hover:text-primary transition-colors duration-200 font-medium"
+          >
+            Take Test
+          </a>
+
           <!-- PayFees Dropdown -->
           <div class="relative group">
             <button
@@ -123,6 +132,16 @@
         >
           {{ link.name }}
         </router-link>
+
+        <a
+          href="https://manchclasses.theonlinetests.com/dynamicwl/login"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="closeMobileMenu"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+        >
+          Take Test
+        </a>
 
         <!-- PayFees Mobile Links -->
         <div class="border-t border-gray-100 pt-2 mt-2">
