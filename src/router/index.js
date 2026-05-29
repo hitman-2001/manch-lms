@@ -87,6 +87,24 @@ const routes = [
     component: () => import("../pages/admin/AdminResults.vue"),
     meta: { requiresAuth: true },
   },
+  {
+    path: "/admin/enquiries",
+    name: "AdminEnquiries",
+    component: () => import("../pages/admin/AdminEnquiries.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/students",
+    name: "AdminStudents",
+    component: () => import("../pages/admin/AdminStudents.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/registrations",
+    name: "AdminRegistrations",
+    component: () => import("../pages/admin/AdminRegistrations.vue"),
+    meta: { requiresAuth: true },
+  },
 
   // Catch-all 404
   {

@@ -211,6 +211,7 @@
 
 <script>
 import { submitEnquiry } from "../services/firestoreService";
+import { sendEnquiryEmail } from "../services/emailService";
 
 export default {
   name: "AdmissionPage",
@@ -246,6 +247,15 @@ export default {
       this.formError = null;
       try {
         await submitEnquiry({ ...this.form });
+        
+        // Optimistic email dispatch
+        try {
+          await sendEnquiryEmail({ ...this.form });
+        } catch (emailErr) {
+          console.error("Failed to send notification email:", emailErr);
+          // Do not fail the UI state; DB save succeeded!
+        }
+
         this.submittedName = this.form.name;
         this.submitted = true;
       } catch (err) {

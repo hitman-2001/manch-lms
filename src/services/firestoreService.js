@@ -267,3 +267,116 @@ export const updateMaterial = async (docId, updates) => {
   const ref = doc(db, "materials", docId);
   await updateDoc(ref, { ...updates, updatedAt: serverTimestamp() });
 };
+
+// ─── GET & DELETE ENQUIRIES ─────────────────────────────────
+
+/**
+ * Fetch all admission enquiries ordered by creation date (newest first).
+ * @returns {Promise<Array>}
+ */
+export const getEnquiries = async () => {
+  const q = query(collection(db, "enquiries"), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+    };
+  });
+};
+
+/**
+ * Delete an enquiry entry from Firestore.
+ * @param {string} docId
+ * @returns {Promise<void>}
+ */
+export const deleteEnquiry = async (docId) => {
+  await deleteDoc(doc(db, "enquiries", docId));
+};
+
+// ─── GET & DELETE REGISTRATIONS ──────────────────────────────
+
+/**
+ * Fetch all MSAT registrations ordered by creation date (newest first).
+ * @returns {Promise<Array>}
+ */
+export const getRegistrations = async () => {
+  const q = query(collection(db, "registrations"), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+    };
+  });
+};
+
+/**
+ * Delete an MSAT registration entry from Firestore.
+ * @param {string} docId
+ * @returns {Promise<void>}
+ */
+export const deleteRegistration = async (docId) => {
+  await deleteDoc(doc(db, "registrations", docId));
+};
+
+// ─── STUDENTS ───────────────────────────────────────────────
+
+/**
+ * Check if a student with the given phone number already exists in Firestore.
+ * @param {string} phone
+ * @returns {Promise<boolean>}
+ */
+export const checkStudentExists = async (phone) => {
+  const q = query(collection(db, "students"), where("phone", "==", phone));
+  const snapshot = await getDocs(q);
+  return !snapshot.empty;
+};
+
+/**
+ * Add a new student record to the students collection.
+ * @param {{ name, standard, school, phone }} data
+ * @returns {Promise<DocumentReference>}
+ */
+export const addStudentInfo = async ({ name, standard, school, phone }) => {
+  return await addDoc(collection(db, "students"), {
+    name,
+    standard,
+    school,
+    phone,
+    createdAt: serverTimestamp(),
+  });
+};
+
+/**
+ * Fetch all registered students ordered by registration date (newest first).
+ * @returns {Promise<Array>}
+ */
+export const getStudents = async () => {
+  const q = query(collection(db, "students"), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+    };
+  });
+};
+
+/**
+ * Delete a student record from Firestore.
+ * @param {string} docId
+ * @returns {Promise<void>}
+ */
+export const deleteStudent = async (docId) => {
+  await deleteDoc(doc(db, "students", docId));
+};
+
+
+

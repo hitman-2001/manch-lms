@@ -299,18 +299,17 @@
 
           <div class="flex gap-2 mt-auto">
             <button
-              @click="openPreview(mat)"
-              class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 rounded-lg text-sm font-medium transition text-center"
+              @click="handlePreview(mat)"
+              class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 rounded-lg text-sm font-medium transition text-center cursor-pointer"
             >
               Preview
             </button>
-            <a
-              :href="getDownloadUrl(mat)"
-              :download="mat.title"
-              class="flex-1 bg-primary hover:bg-primary-dark text-white py-2 rounded-lg text-sm font-medium transition text-center"
+            <button
+              @click="handleDownload(mat)"
+              class="flex-1 bg-primary hover:bg-primary-dark text-white py-2 rounded-lg text-sm font-medium transition text-center cursor-pointer"
             >
               ⬇ Download
-            </a>
+            </button>
           </div>
 
           <!-- Admin delete -->
@@ -590,6 +589,121 @@
         </div>
       </div>
     </div>
+
+    <!-- Student Info Form Modal (Compulsory before access) -->
+    <div
+      v-if="showStudentModal"
+      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4 cursor-default"
+      @click.self="showStudentModal = false"
+    >
+      <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden border border-gray-100 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-700 to-blue-600 px-6 py-6 text-white text-center relative">
+          <div class="h-12 w-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3">
+            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg">Student Information</h3>
+          <p class="text-xs text-blue-100 mt-1">Please fill in your details to unlock and access study materials.</p>
+          <button @click="showStudentModal = false" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Form Body -->
+        <form @submit.prevent="submitStudentForm" class="p-6 space-y-4">
+          <!-- Error feedback -->
+          <div v-if="studentFormError" class="p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl">
+            ⚠️ {{ studentFormError }}
+          </div>
+
+          <!-- Name -->
+          <div>
+            <label for="std-name" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+              Full Name <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="std-name"
+              v-model="studentForm.name"
+              type="text"
+              required
+              placeholder="Enter your full name"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition disabled:opacity-60"
+              :disabled="submittingStudentInfo"
+            />
+          </div>
+
+          <!-- Standard -->
+          <div>
+            <label for="std-class" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+              Standard / Class <span class="text-red-500">*</span>
+            </label>
+            <select
+              id="std-class"
+              v-model="studentForm.standard"
+              required
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white disabled:opacity-60"
+              :disabled="submittingStudentInfo"
+            >
+              <option value="" disabled>Select your class</option>
+              <!-- Show non-"All" options -->
+              <option v-for="std in standards.slice(1)" :key="std" :value="std">
+                {{ std }}
+              </option>
+            </select>
+          </div>
+
+          <!-- School -->
+          <div>
+            <label for="std-school" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+              School Name <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="std-school"
+              v-model="studentForm.school"
+              type="text"
+              required
+              placeholder="Enter your school/college name"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition disabled:opacity-60"
+              :disabled="submittingStudentInfo"
+            />
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label for="std-phone" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+              Mobile Number <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="std-phone"
+              v-model="studentForm.phone"
+              type="tel"
+              pattern="[6-9][0-9]{9}"
+              required
+              placeholder="Enter 10-digit mobile number"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition disabled:opacity-60"
+              :disabled="submittingStudentInfo"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            :disabled="submittingStudentInfo"
+            class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold rounded-xl transition text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200 mt-2 cursor-pointer"
+          >
+            <svg v-if="submittingStudentInfo" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            {{ submittingStudentInfo ? "Verifying..." : "Unlock Access" }}
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -599,6 +713,8 @@ import {
   addMaterial,
   updateMaterial,
   deleteMaterial,
+  checkStudentExists,
+  addStudentInfo,
 } from "../services/firestoreService";
 import {
   uploadToCloudinary,
@@ -651,6 +767,18 @@ export default {
       // Delete
       deleteTarget: null,
       deleting: false,
+      // Student details modal
+      showStudentModal: false,
+      isStudentInfoSubmitted: !!localStorage.getItem("student_info_submitted"),
+      submittingStudentInfo: false,
+      studentFormError: null,
+      studentForm: {
+        name: "",
+        standard: "",
+        school: "",
+        phone: "",
+      },
+      pendingAction: null,
     };
   },
 
@@ -827,6 +955,89 @@ export default {
         console.error("Delete error:", e);
       } finally {
         this.deleting = false;
+      }
+    },
+
+    handlePreview(mat) {
+      if (this.isAdmin || this.isStudentInfoSubmitted) {
+        this.openPreview(mat);
+      } else {
+        this.pendingAction = { type: "preview", mat };
+        this.showStudentModal = true;
+      }
+    },
+
+    handleDownload(mat) {
+      if (this.isAdmin || this.isStudentInfoSubmitted) {
+        this.triggerDownload(mat);
+      } else {
+        this.pendingAction = { type: "download", mat };
+        this.showStudentModal = true;
+      }
+    },
+
+    triggerDownload(mat) {
+      const url = this.getDownloadUrl(mat);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", mat.title);
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    },
+
+    async submitStudentForm() {
+      const { name, standard, school, phone } = this.studentForm;
+      if (!name || !standard || !school || !phone) {
+        this.studentFormError = "All fields are compulsory.";
+        return;
+      }
+      this.submittingStudentInfo = true;
+      this.studentFormError = null;
+      try {
+        const cleanedPhone = phone.replace(/\D/g, "");
+        if (cleanedPhone.length < 10) {
+          this.studentFormError = "Please enter a valid 10-digit mobile number.";
+          this.submittingStudentInfo = false;
+          return;
+        }
+
+        // Firestore double-entry check by phone number
+        const exists = await checkStudentExists(cleanedPhone);
+        if (!exists) {
+          await addStudentInfo({
+            name: name.trim(),
+            standard,
+            school: school.trim(),
+            phone: cleanedPhone,
+          });
+        }
+
+        // Save submitted state
+        localStorage.setItem("student_info_submitted", "true");
+        this.isStudentInfoSubmitted = true;
+        this.showStudentModal = false;
+
+        // Perform pending action
+        if (this.pendingAction) {
+          const { type, mat } = this.pendingAction;
+          if (type === "preview") {
+            this.openPreview(mat);
+          } else if (type === "download") {
+            this.triggerDownload(mat);
+          }
+          this.pendingAction = null;
+        }
+      } catch (err) {
+        console.error("Student form submission error:", err);
+        if (!navigator.onLine || err.message?.toLowerCase().includes("network") || err.code === "unavailable") {
+          this.studentFormError = "Network connection error. Please make sure you are connected to the internet and try again.";
+        } else {
+          this.studentFormError = "Something went wrong. Please check your connection and try again.";
+        }
+      } finally {
+        this.submittingStudentInfo = false;
       }
     },
   },

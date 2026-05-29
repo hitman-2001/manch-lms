@@ -158,6 +158,7 @@
 
 <script>
 import { submitMSATRegistration } from '../services/firestoreService'
+import { sendMSATRegistrationEmail } from '../services/emailService'
 
 export default {
   name: 'MSATRegistration',
@@ -189,6 +190,14 @@ export default {
       this.formError = null
       try {
         await submitMSATRegistration({ ...this.form })
+        
+        // Optimistic email dispatch
+        try {
+          await sendMSATRegistrationEmail({ ...this.form })
+        } catch (emailErr) {
+          console.error("Failed to send MSAT notification email:", emailErr)
+        }
+
         this.submittedName = this.form.name
         this.submitted = true
       } catch (err) {
