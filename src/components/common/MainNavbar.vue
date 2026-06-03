@@ -60,7 +60,7 @@
               </a>
               <div class="h-px bg-gray-100 my-1"></div>
               <a
-                href="/manch-class.apk"
+                href="/manch-classes.apk"
                 download
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
               >
@@ -185,7 +185,7 @@
             Online Test Portal
           </a>
           <a
-            href="/manch-class.apk"
+            href="/manch-classes.apk"
             download
             @click="closeMobileMenu"
             class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
