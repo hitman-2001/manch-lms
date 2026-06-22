@@ -147,6 +147,26 @@ export default {
           image: new URL("../../assets/carousel/slide7.jpg", import.meta.url)
             .href,
         },
+        {
+          image: new URL("../../assets/carousel/slide8.jpg", import.meta.url)
+            .href,
+        },
+        {
+          image: new URL("../../assets/carousel/slide9.jpg", import.meta.url)
+            .href,
+        },
+        {
+          image: new URL("../../assets/carousel/slide10.jpg", import.meta.url)
+            .href,
+        },
+        {
+          image: new URL("../../assets/carousel/slide11.jpg", import.meta.url)
+            .href,
+        },
+        {
+          image: new URL("../../assets/carousel/slide12.jpg", import.meta.url)
+            .href,
+        },
       ],
     };
   },
