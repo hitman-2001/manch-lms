@@ -120,31 +120,31 @@ export default {
       windowWidth: window.innerWidth,
       slides: [
         {
-          image: new URL("../../assets/carousel/slide1.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide1.jpg", import.meta.url)
             .href,
         },
         {
-          image: new URL("../../assets/carousel/slide2.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide2.jpg", import.meta.url)
             .href,
         },
         {
-          image: new URL("../../assets/carousel/slide3.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide3.jpg", import.meta.url)
             .href,
         },
         {
-          image: new URL("../../assets/carousel/slide4.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide4.jpg", import.meta.url)
             .href,
         },
         {
-          image: new URL("../../assets/carousel/slide5.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide5.jpg", import.meta.url)
             .href,
         },
         {
-          image: new URL("../../assets/carousel/slide6.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide6.jpg", import.meta.url)
             .href,
         },
         {
-          image: new URL("../../assets/carousel/slide7.png", import.meta.url)
+          image: new URL("../../assets/carousel/slide7.jpg", import.meta.url)
             .href,
         },
       ],
