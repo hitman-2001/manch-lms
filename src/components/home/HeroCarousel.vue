@@ -139,6 +139,14 @@ export default {
           image: new URL("../../assets/carousel/slide5.png", import.meta.url)
             .href,
         },
+        {
+          image: new URL("../../assets/carousel/slide6.png", import.meta.url)
+            .href,
+        },
+        {
+          image: new URL("../../assets/carousel/slide7.png", import.meta.url)
+            .href,
+        },
       ],
     };
   },
