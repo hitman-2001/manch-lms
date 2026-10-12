@@ -12,6 +12,7 @@
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/postcss": "^4.2.2",
     "autoprefixer": "^10.5.0",
+    "canvas-confetti": "^1.9.4",
     "firebase": "^12.12.1",
     "postcss": "^8.5.10",
     "tailwindcss": "^4.2.2",

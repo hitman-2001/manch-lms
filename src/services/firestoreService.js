@@ -174,19 +174,23 @@ export const deleteFaculty = async (docId) => {
  */
 export const submitEnquiry = async ({
   name,
-  email,
+  email = "",
   phone,
-  currentClass,
-  course,
-  message,
+  currentClass = "",
+  course = "",
+  message = "",
+  branch = "",
+  school = "",
 }) => {
   return await addDoc(collection(db, "enquiries"), {
     name,
-    email,
+    email: email || "",
     phone,
-    currentClass,
-    course,
-    message,
+    currentClass: currentClass || "",
+    course: course || "",
+    message: message || "",
+    branch: branch || "",
+    school: school || "",
     createdAt: serverTimestamp(),
   });
 };
