@@ -1,34 +1,5 @@
 <template>
-  <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50 transition-all duration-300">
-    <!-- Navratri Festive Announcement Ribbon -->
-    <div
-      v-if="showNavratriRibbon"
-      class="bg-gradient-to-r from-red-700 via-amber-600 to-rose-700 text-white text-[11px] sm:text-xs py-1.5 px-3 sm:px-6 flex items-center justify-between border-b border-amber-300/30 shadow-inner"
-    >
-      <div class="flex items-center gap-2 mx-auto sm:mx-0 overflow-hidden">
-        <span class="animate-bounce">🪔</span>
-        <span class="font-bold text-amber-200">शुभ नवरात्रि!</span>
-        <span class="hidden sm:inline text-white/95 font-medium">Manch Classes wishes you and your family a blessed Navratri!</span>
-        <span class="inline sm:hidden text-white/95 font-medium">Happy Navratri from Manch Classes!</span>
-        <button
-          @click="triggerNavratriCelebration"
-          class="ml-2 inline-flex items-center gap-1 bg-amber-300 hover:bg-amber-200 text-red-950 font-bold px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] shadow hover:scale-105 active:scale-95 transition-all cursor-pointer"
-        >
-          <span>Celebrate</span>
-          <span>✨</span>
-        </button>
-      </div>
-      <button
-        @click="dismissNavratriRibbon"
-        class="text-white/80 hover:text-white p-0.5 rounded-full hover:bg-white/10 transition-colors ml-2 flex-shrink-0 cursor-pointer"
-        title="Dismiss announcement"
-      >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-
+  <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-20">
         <div class="flex items-center">
@@ -142,17 +113,6 @@
               </a>
             </div>
           </div>
-
-          <!-- Festive Navratri Celebration Button -->
-          <button
-            @click="triggerNavratriCelebration"
-            class="hidden lg:flex items-center gap-1.5 bg-gradient-to-r from-amber-500/10 via-rose-500/15 to-amber-500/10 hover:from-amber-500/25 hover:to-rose-500/30 text-amber-800 border border-amber-400/50 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
-            title="Celebrate Navratri with Manch Classes"
-          >
-            <span class="animate-pulse">🪔</span>
-            <span>Shubh Navratri</span>
-            <span class="text-amber-500">✨</span>
-          </button>
 
           <router-link
             to="/admission"
@@ -268,16 +228,6 @@
         >
           Admissions
         </router-link>
-
-        <!-- Navratri Mobile Celebration Button -->
-        <button
-          @click="triggerNavratriCelebrationMobile"
-          class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-lg bg-gradient-to-r from-amber-600 via-rose-600 to-amber-600 text-white font-bold text-sm shadow-md mt-2 active:scale-95 transition-all cursor-pointer"
-        >
-          <span>🪔</span>
-          <span>Shubh Navratri Wishes</span>
-          <span>✨</span>
-        </button>
       </div>
     </div>
   </nav>
@@ -288,7 +238,6 @@ export default {
   name: "MainNavbar",
   data() {
     return {
-      showNavratriRibbon: sessionStorage.getItem('manch_navratri_ribbon_dismissed') !== 'true',
       isMobileMenuOpen: false,
       navLinks: [
         { name: "Home", path: "/" },
@@ -307,17 +256,6 @@ export default {
     },
     closeMobileMenu() {
       this.isMobileMenuOpen = false;
-    },
-    triggerNavratriCelebration() {
-      window.dispatchEvent(new CustomEvent('open-navratri-celebration'));
-    },
-    triggerNavratriCelebrationMobile() {
-      this.closeMobileMenu();
-      window.dispatchEvent(new CustomEvent('open-navratri-celebration'));
-    },
-    dismissNavratriRibbon() {
-      this.showNavratriRibbon = false;
-      sessionStorage.setItem('manch_navratri_ribbon_dismissed', 'true');
     },
   },
 };

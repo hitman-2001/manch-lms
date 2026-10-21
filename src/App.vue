@@ -5,7 +5,7 @@
       <MainNavbar />
     </template>
 
-    <main :class="isAdminRoute ? '' : 'flex-grow pt-20'">
+    <main :class="isAdminRoute ? '' : 'flex-grow pt-16'">
       <router-view />
     </main>
 
@@ -16,9 +16,6 @@
     <!-- Global Toast Notification (always present) -->
     <ToastNotification />
 
-    <!-- Navratri Celebration Wishes & Animations -->
-    <NavratriCelebration />
-
     <!-- Scroll-triggered Admission Enquiry Modal & WhatsApp Contact -->
     <ScrollEnquiryModal />
   </div>
@@ -28,7 +25,6 @@
 import MainNavbar from './components/common/MainNavbar.vue'
 import MainFooter from './components/common/MainFooter.vue'
 import ToastNotification from './components/common/ToastNotification.vue'
-import NavratriCelebration from './components/common/NavratriCelebration.vue'
 import ScrollEnquiryModal from './components/common/ScrollEnquiryModal.vue'
 
 export default {
@@ -37,7 +33,6 @@ export default {
     MainNavbar,
     MainFooter,
     ToastNotification,
-    NavratriCelebration,
     ScrollEnquiryModal
   },
   computed: {
