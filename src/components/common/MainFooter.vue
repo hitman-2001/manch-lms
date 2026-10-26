@@ -265,11 +265,11 @@
               <span>contact@manchclasses.com</span>
             </a>
 
-            <!-- Fees Refund Policy Link (Navigates directly to /refund-policy) -->
+            <!-- Terms and Conditions Link (Navigates directly to /terms-and-conditions) -->
             <router-link
-              to="/refund-policy"
+              to="/terms-and-conditions"
               class="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-300 hover:text-secondary transition-colors group"
-              title="View Fees Refund Policy"
+              title="View Terms and Conditions"
             >
               <svg
                 class="h-4 w-4 text-secondary group-hover:scale-110 transition-transform flex-shrink-0"
@@ -284,7 +284,7 @@
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <span>Fees Refund Policy</span>
+              <span>Terms and Conditions</span>
             </router-link>
           </div>
         </div>

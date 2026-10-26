@@ -50,9 +50,13 @@ const routes = [
     component: () => import("../pages/MSATRegistration.vue"),
   },
   {
+    path: "/terms-and-conditions",
+    name: "TermsAndConditions",
+    component: () => import("../pages/TermsAndConditions.vue"),
+  },
+  {
     path: "/refund-policy",
-    name: "RefundPolicy",
-    component: () => import("../pages/RefundPolicy.vue"),
+    redirect: "/terms-and-conditions",
   },
 
   // ── Admin Routes (protected) ─────────────────────────────────

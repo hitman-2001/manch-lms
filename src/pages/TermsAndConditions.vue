@@ -20,13 +20,13 @@
           <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
           </svg>
-          Print Policy
+          Print Terms
         </button>
       </div>
 
-      <!-- Main Policy Card (Printable Layout) -->
+      <!-- Main Terms Card -->
       <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden print:shadow-none print:border-none">
-        <!-- Official Letterhead Header -->
+        <!-- Official Header -->
         <div class="p-6 sm:p-10 border-b border-gray-100 text-center relative">
           <div class="flex justify-center mb-4">
             <img
@@ -42,15 +42,15 @@
             (A Division of Pencilbox Education LLP)
           </p>
           <div class="inline-block mt-3 px-4 py-1 bg-amber-50 border border-amber-200/60 rounded-full text-xs font-bold text-amber-800 tracking-wider uppercase">
-            Official Fees Refund Policy
+            Terms and Conditions
           </div>
         </div>
 
-        <!-- Policy Body Content -->
+        <!-- Terms Body Content -->
         <div class="p-6 sm:p-10 space-y-8 text-gray-700 leading-relaxed text-sm sm:text-base">
           <!-- Introduction -->
           <p class="text-gray-600 bg-gray-50 p-4 sm:p-5 rounded-xl border border-gray-100 leading-relaxed">
-            At <strong>Manch Science Classes</strong>, we strive to provide the best educational experience for our students. However, we understand that sometimes circumstances change, and you may need to cancel your enrollment. Our refund policy is designed to be fair, structured, and transparent.
+            At <strong>Manch Science Classes</strong>, we strive to provide the best educational experience for our students. However, we understand that sometimes circumstances change, and you may need to cancel your enrollment. Our terms and conditions are designed to be fair, transparent, and structured.
           </p>
 
           <!-- 1. Necessary Deductions -->
@@ -61,7 +61,7 @@
             </h2>
             <div class="pl-2 sm:pl-9">
               <p class="text-gray-700">
-                Upon cancellation, necessary deductions will be made for admission fees, stationery, and printed study notes. The total amount for these deductions will <strong>not exceed ₹10,000</strong>.
+                Upon cancellation, necessary deductions will be made for admission fees, stationery, and notes. The total amount for these deductions will <strong>not exceed ₹10,000</strong>.
               </p>
             </div>
           </div>
@@ -73,7 +73,7 @@
               Refund Schedule (after necessary deductions):
             </h2>
             <div class="pl-2 sm:pl-9 space-y-3">
-              <!-- Schedule Table/Grid -->
+              <!-- Schedule Table -->
               <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-xs">
                 <table class="w-full text-left text-sm">
                   <thead class="bg-gray-50 text-gray-700 uppercase font-semibold text-xs border-b border-gray-200">
@@ -110,7 +110,7 @@
             </div>
           </div>
 
-          <!-- Procedure to Request a Refund -->
+          <!-- 3. Procedure to Request a Refund -->
           <div>
             <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
               <span class="w-7 h-7 rounded-lg bg-blue-50 text-primary flex items-center justify-center text-sm font-bold">3</span>
@@ -131,7 +131,7 @@
             </div>
           </div>
 
-          <!-- Important Notes -->
+          <!-- 4. Important Notes -->
           <div>
             <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
               <span class="w-7 h-7 rounded-lg bg-blue-50 text-primary flex items-center justify-center text-sm font-bold">4</span>
@@ -152,22 +152,22 @@
           <!-- Amendment Right Notice -->
           <div class="pt-4 border-t border-gray-100">
             <p class="text-xs sm:text-sm text-gray-500 italic bg-amber-50/60 border border-amber-200/50 p-4 rounded-xl text-center">
-              Manch Science Classes reserves the right to amend this policy at any time. Please review our refund policy regularly to stay informed of any updates.
+              Manch Science Classes reserves the right to amend these terms and conditions at any time. Please review regularly to stay informed of any updates.
             </p>
           </div>
 
           <!-- Contact Support Box -->
           <div class="bg-gray-50 rounded-xl p-5 border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 print:hidden">
             <div>
-              <h3 class="font-bold text-gray-900 text-sm">Need Help with Fees or Cancellation?</h3>
-              <p class="text-xs text-gray-500 mt-0.5">Reach out to our accounts desk directly.</p>
+              <h3 class="font-bold text-gray-900 text-sm">Have Questions Regarding Terms & Admission?</h3>
+              <p class="text-xs text-gray-500 mt-0.5">Reach out to our administrative desk directly.</p>
             </div>
             <div class="flex items-center gap-3">
               <a
-                href="mailto:contact@manchclasses.com?subject=Enrolment%20Cancellation%20and%20Refund%20Request"
+                href="mailto:contact@manchclasses.com?subject=Enrolment%20Terms%20and%20Conditions%20Inquiry"
                 class="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-xs font-semibold rounded-lg shadow-sm transition-colors"
               >
-                Email Accounts
+                Email Support
               </a>
               <a
                 href="tel:+918830000914"
@@ -185,7 +185,7 @@
 
 <script>
 export default {
-  name: "RefundPolicy",
+  name: "TermsAndConditions",
   methods: {
     printPolicy() {
       window.print();
