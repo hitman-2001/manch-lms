@@ -49,6 +49,11 @@ const routes = [
     name: "MSATRegistration",
     component: () => import("../pages/MSATRegistration.vue"),
   },
+  {
+    path: "/refund-policy",
+    name: "RefundPolicy",
+    component: () => import("../pages/RefundPolicy.vue"),
+  },
 
   // ── Admin Routes (protected) ─────────────────────────────────
   {

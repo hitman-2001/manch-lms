@@ -115,7 +115,7 @@
             <li>
               <router-link
                 to="/admission"
-                class="text-secondary font-bold flex items-center gap-2 group"
+                class="hover:text-secondary text-secondary font-medium transition-colors flex items-center gap-2 group"
                 ><span
                   class="h-px w-0 bg-secondary group-hover:w-3 transition-all"
                 ></span
@@ -221,14 +221,15 @@
 
           <!-- Bottom Contact Bar -->
           <div
-            class="mt-6 md:mt-8 pt-6 border-t border-gray-800/50 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-x-10 sm:gap-y-3"
+            class="mt-6 md:mt-8 pt-6 border-t border-gray-800/50 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-x-8 sm:gap-y-3"
           >
+            <!-- Phone Contact -->
             <a
               href="tel:+918830000914"
               class="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-300 hover:text-secondary transition-colors"
             >
               <svg
-                class="h-4 w-4 text-secondary"
+                class="h-4 w-4 text-secondary flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -240,14 +241,16 @@
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              +91 8830000914
+              <span>+91 8830000914</span>
             </a>
+
+            <!-- Contact Mail -->
             <a
               href="mailto:contact@manchclasses.com"
               class="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-300 hover:text-secondary transition-colors"
             >
               <svg
-                class="h-4 w-4 text-secondary"
+                class="h-4 w-4 text-secondary flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -259,8 +262,30 @@
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              contact@manchclasses.com
+              <span>contact@manchclasses.com</span>
             </a>
+
+            <!-- Fees Refund Policy Link (Navigates directly to /refund-policy) -->
+            <router-link
+              to="/refund-policy"
+              class="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-300 hover:text-secondary transition-colors group"
+              title="View Fees Refund Policy"
+            >
+              <svg
+                class="h-4 w-4 text-secondary group-hover:scale-110 transition-transform flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Fees Refund Policy</span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -272,10 +297,6 @@
           &copy; {{ new Date().getFullYear() }} Manch Science Classes.
           Intelligence meets Innovation.
         </p>
-        <!-- <div class="flex gap-6 md:gap-8 text-[10px]">
-          <a href="#" class="hover:text-white transition-colors">Privacy</a>
-          <a href="#" class="hover:text-white transition-colors">Terms</a>
-        </div> -->
       </div>
     </div>
   </footer>
