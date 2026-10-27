@@ -281,14 +281,23 @@ export const updateMaterial = async (docId, updates) => {
 export const getEnquiries = async () => {
   const q = query(collection(db, "enquiries"), orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => {
-    const data = doc.data();
-    return {
-      id: doc.id,
-      ...data,
-      createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
-    };
-  });
+  return snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+      };
+    })
+    .filter((item) => {
+      // Exclude cancellation/refund requests so they only appear under Refund Requests
+      const isRefund =
+        item.submissionType === "Admission Cancellation & Refund Request" ||
+        (item.course && typeof item.course === "string" && item.course.startsWith("Cancellation:")) ||
+        (item.message && typeof item.message === "string" && item.message.includes("[CANCELLATION & REFUND REQUEST]"));
+      return !isRefund;
+    });
 };
 
 /**
@@ -388,38 +397,168 @@ export const deleteStudent = async (docId) => {
 // ─── REFUND & CANCELLATION REQUESTS ──────────────────────────
 
 /**
+ * Helper to parse a legacy refund request stored in the enquiries collection.
+ */
+const parseEnquiryRefundMessage = (docData) => {
+  const msg = docData.message || "";
+  const extract = (label) => {
+    const match = msg.match(new RegExp(label + ":\\s*([^\\n\\|]+)"));
+    return match ? match[1].trim() : "";
+  };
+  const extractReason = () => {
+    const p = msg.split(/Reason:\s*\n/i);
+    return p.length > 1 ? p[1].trim() : "";
+  };
+
+  const parentMatch = extract("Parent/Guardian");
+  const relMatch = parentMatch ? parentMatch.match(/\(([^)]+)\)/) : null;
+  const parentName = parentMatch ? parentMatch.replace(/\s*\([^)]*\)/, "").trim() : "";
+
+  return {
+    studentName: docData.name || "",
+    studentId: extract("Student ID") || "N/A",
+    currentClass: docData.currentClass || "",
+    board: extract("Board") || "",
+    branch: docData.branch || extract("Branch") || "",
+    courseEnrolled: extract("Enrolled Course") || docData.course || "",
+    admissionDate: extract("Date of Admission") || "",
+    lastDateAttended: extract("Last Date Attended") || "",
+    parentName: parentName || "",
+    relationship: relMatch ? relMatch[1] : "Parent",
+    phone: docData.phone || "",
+    email: docData.email || "",
+    feesPaid: extract("Total Fees Paid")?.replace(/[^\d.]/g, "") || "",
+    refundRequested: extract("Refund Choice") || "Yes, I wish to request a refund",
+    paymentReference: extract("Payment Reference") || "N/A",
+    cancellationReason: extractReason() || msg,
+    status: docData.status || "Pending",
+    consentAccuracy: true,
+    consentVerification: true,
+    consentContact: true,
+    createdAt: docData.createdAt,
+  };
+};
+
+/**
+ * Migrate any existing refund requests from enquiries collection to refund_requests.
+ */
+export const migrateExistingRefundEnquiries = async () => {
+  try {
+    const q = query(collection(db, "enquiries"));
+    const snapshot = await getDocs(q);
+    const refundEnquiryDocs = snapshot.docs.filter((d) => {
+      const data = d.data();
+      return (
+        data.submissionType === "Admission Cancellation & Refund Request" ||
+        (data.course && typeof data.course === "string" && data.course.startsWith("Cancellation:")) ||
+        (data.message && typeof data.message === "string" && data.message.includes("[CANCELLATION & REFUND REQUEST]"))
+      );
+    });
+
+    for (const d of refundEnquiryDocs) {
+      const data = d.data();
+      const parsed = parseEnquiryRefundMessage({ id: d.id, ...data });
+
+      await addDoc(collection(db, "refund_requests"), {
+        ...parsed,
+        createdAt: data.createdAt || serverTimestamp(),
+      });
+
+      await deleteDoc(doc(db, "enquiries", d.id));
+    }
+  } catch (err) {
+    console.warn("Migration notice (enquiries -> refund_requests):", err);
+  }
+};
+
+/**
  * Submit an Admission Cancellation and Refund Request.
+ * Saves strictly to the refund_requests collection.
  * @param {Object} data
  * @returns {Promise<DocumentReference>}
  */
 export const submitRefundRequest = async (data) => {
-  try {
-    await addDoc(collection(db, "refund_requests"), {
-      ...data,
-      status: "Pending",
-      createdAt: serverTimestamp(),
-    });
-  } catch (err) {
-    console.warn("Could not write to refund_requests collection:", err);
-  }
-
-  return await addDoc(collection(db, "enquiries"), {
-    name: data.studentName,
-    email: data.email || "",
-    phone: data.phone,
+  return await addDoc(collection(db, "refund_requests"), {
+    studentName: data.studentName || "",
+    studentId: data.studentId || "",
     currentClass: data.currentClass || "",
-    course: `Cancellation: ${data.courseEnrolled || data.currentClass} (${data.branch})`,
+    board: data.board || "",
     branch: data.branch || "",
-    submissionType: "Admission Cancellation & Refund Request",
-    message: `[CANCELLATION & REFUND REQUEST]
-Student ID: ${data.studentId || "N/A"}
-Parent/Guardian: ${data.parentName} (${data.relationship})
-Date of Admission: ${data.admissionDate} | Last Date Attended: ${data.lastDateAttended}
-Board: ${data.board} | Enrolled Course: ${data.courseEnrolled}
-Total Fees Paid: ₹${data.feesPaid} | Refund Choice: ${data.refundRequested}
-Payment Reference: ${data.paymentReference || "N/A"}
-Reason:
-${data.cancellationReason}`,
+    courseEnrolled: data.courseEnrolled || "",
+    admissionDate: data.admissionDate || "",
+    parentName: data.parentName || "",
+    relationship: data.relationship || "",
+    phone: data.phone || "",
+    email: data.email || "",
+    cancellationReason: data.cancellationReason || "",
+    lastDateAttended: data.lastDateAttended || "",
+    feesPaid: data.feesPaid || "",
+    refundRequested: data.refundRequested || "Yes, I wish to request a refund",
+    paymentReference: data.paymentReference || "",
+    consentAccuracy: Boolean(data.consentAccuracy),
+    consentVerification: Boolean(data.consentVerification),
+    consentContact: Boolean(data.consentContact),
+    status: "Pending",
     createdAt: serverTimestamp(),
   });
+};
+
+/**
+ * Fetch all refund requests ordered by creation date (newest first).
+ * Auto-migrates any legacy enquiries on first fetch.
+ * @returns {Promise<Array>}
+ */
+export const getRefundRequests = async () => {
+  try {
+    await migrateExistingRefundEnquiries();
+  } catch (mErr) {
+    console.warn("Auto-migration check notice:", mErr);
+  }
+
+  try {
+    const q = query(collection(db, "refund_requests"), orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+      };
+    });
+  } catch (err) {
+    const snapshot = await getDocs(collection(db, "refund_requests"));
+    const list = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
+      };
+    });
+    return list.sort((a, b) => {
+      const tA = new Date(a.createdAt || 0).getTime();
+      const tB = new Date(b.createdAt || 0).getTime();
+      return tB - tA;
+    });
+  }
+};
+
+/**
+ * Update refund request status.
+ * @param {string} docId
+ * @param {string} status - Pending | In Review | Approved | Refunded | Rejected
+ */
+export const updateRefundRequestStatus = async (docId, status) => {
+  const ref = doc(db, "refund_requests", docId);
+  await updateDoc(ref, { status, updatedAt: serverTimestamp() });
+};
+
+/**
+ * Delete a refund request from Firestore.
+ * @param {string} docId
+ * @returns {Promise<void>}
+ */
+export const deleteRefundRequest = async (docId) => {
+  await deleteDoc(doc(db, "refund_requests", docId));
 };

@@ -103,6 +103,16 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/admin/refunds",
+    name: "AdminRefundRequests",
+    component: () => import("../pages/admin/AdminRefundRequests.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/refund-requests",
+    redirect: "/admin/refunds",
+  },
+  {
     path: "/admin/students",
     name: "AdminStudents",
     component: () => import("../pages/admin/AdminStudents.vue"),

@@ -350,7 +350,13 @@ export default {
   },
   computed: {
     filteredEnquiries() {
-      let list = this.enquiries;
+      let list = this.enquiries.filter((item) => {
+        const isRefund =
+          item.submissionType === "Admission Cancellation & Refund Request" ||
+          (item.course && typeof item.course === "string" && item.course.startsWith("Cancellation:")) ||
+          (item.message && typeof item.message === "string" && item.message.includes("[CANCELLATION & REFUND REQUEST]"));
+        return !isRefund;
+      });
 
       // Month filter
       if (this.selectedMonth && this.selectedMonth !== "All Months") {

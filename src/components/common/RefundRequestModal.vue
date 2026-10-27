@@ -486,8 +486,13 @@
             <button
               v-else
               @click="submitFinalRequest"
-              :disabled="loading"
-              class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+              :disabled="loading || !isConsentGiven"
+              class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2"
+              :class="[
+                loading || !isConsentGiven
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed opacity-60 shadow-none'
+                  : 'bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer active:scale-95 shadow-md hover:shadow-lg'
+              ]"
             >
               <svg
                 v-if="loading"
@@ -560,6 +565,22 @@ export default {
         consentContact: false,
       },
     };
+  },
+  computed: {
+    isConsentGiven() {
+      return Boolean(
+        this.form.consentAccuracy &&
+        this.form.consentVerification &&
+        this.form.consentContact
+      );
+    },
+  },
+  watch: {
+    isConsentGiven(val) {
+      if (val && this.stepError) {
+        this.stepError = null;
+      }
+    },
   },
   methods: {
     closeModal() {
