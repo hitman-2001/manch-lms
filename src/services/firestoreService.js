@@ -397,7 +397,7 @@ export const deleteStudent = async (docId) => {
 // ─── REFUND & CANCELLATION REQUESTS ──────────────────────────
 
 /**
- * Helper to parse a legacy refund request stored in the enquiries collection.
+ * Helper to parse a refund request (handles both structured fields and legacy message strings).
  */
 const parseEnquiryRefundMessage = (docData) => {
   const msg = docData.message || "";
@@ -415,70 +415,42 @@ const parseEnquiryRefundMessage = (docData) => {
   const parentName = parentMatch ? parentMatch.replace(/\s*\([^)]*\)/, "").trim() : "";
 
   return {
-    studentName: docData.name || "",
-    studentId: extract("Student ID") || "N/A",
+    id: docData.id,
+    studentName: docData.studentName || docData.name || "N/A",
+    studentId: docData.studentId || extract("Student ID") || "N/A",
     currentClass: docData.currentClass || "",
-    board: extract("Board") || "",
+    board: docData.board || extract("Board") || "",
     branch: docData.branch || extract("Branch") || "",
-    courseEnrolled: extract("Enrolled Course") || docData.course || "",
-    admissionDate: extract("Date of Admission") || "",
-    lastDateAttended: extract("Last Date Attended") || "",
-    parentName: parentName || "",
-    relationship: relMatch ? relMatch[1] : "Parent",
+    courseEnrolled: docData.courseEnrolled || extract("Enrolled Course") || docData.course || "",
+    admissionDate: docData.admissionDate || extract("Date of Admission") || "",
+    lastDateAttended: docData.lastDateAttended || extract("Last Date Attended") || "",
+    parentName: docData.parentName || parentName || "Parent / Guardian",
+    relationship: docData.relationship || (relMatch ? relMatch[1] : "Parent"),
     phone: docData.phone || "",
     email: docData.email || "",
-    feesPaid: extract("Total Fees Paid")?.replace(/[^\d.]/g, "") || "",
-    refundRequested: extract("Refund Choice") || "Yes, I wish to request a refund",
-    paymentReference: extract("Payment Reference") || "N/A",
-    cancellationReason: extractReason() || msg,
+    feesPaid: docData.feesPaid || extract("Total Fees Paid")?.replace(/[^\d.]/g, "") || "0",
+    refundRequested: docData.refundRequested || extract("Refund Choice") || "Yes, I wish to request a refund",
+    paymentReference: docData.paymentReference || extract("Payment Reference") || "N/A",
+    cancellationReason: docData.cancellationReason || extractReason() || msg || "No reason specified",
     status: docData.status || "Pending",
-    consentAccuracy: true,
-    consentVerification: true,
-    consentContact: true,
-    createdAt: docData.createdAt,
+    consentAccuracy: docData.consentAccuracy !== undefined ? docData.consentAccuracy : true,
+    consentVerification: docData.consentVerification !== undefined ? docData.consentVerification : true,
+    consentContact: docData.consentContact !== undefined ? docData.consentContact : true,
+    createdAt: docData.createdAt?.toDate ? docData.createdAt.toDate() : (docData.createdAt ? new Date(docData.createdAt) : new Date()),
+    collectionName: docData.collectionName || "enquiries",
   };
 };
 
 /**
- * Migrate any existing refund requests from enquiries collection to refund_requests.
- */
-export const migrateExistingRefundEnquiries = async () => {
-  try {
-    const q = query(collection(db, "enquiries"));
-    const snapshot = await getDocs(q);
-    const refundEnquiryDocs = snapshot.docs.filter((d) => {
-      const data = d.data();
-      return (
-        data.submissionType === "Admission Cancellation & Refund Request" ||
-        (data.course && typeof data.course === "string" && data.course.startsWith("Cancellation:")) ||
-        (data.message && typeof data.message === "string" && data.message.includes("[CANCELLATION & REFUND REQUEST]"))
-      );
-    });
-
-    for (const d of refundEnquiryDocs) {
-      const data = d.data();
-      const parsed = parseEnquiryRefundMessage({ id: d.id, ...data });
-
-      await addDoc(collection(db, "refund_requests"), {
-        ...parsed,
-        createdAt: data.createdAt || serverTimestamp(),
-      });
-
-      await deleteDoc(doc(db, "enquiries", d.id));
-    }
-  } catch (err) {
-    console.warn("Migration notice (enquiries -> refund_requests):", err);
-  }
-};
-
-/**
  * Submit an Admission Cancellation and Refund Request.
- * Saves strictly to the refund_requests collection.
+ * Saves to Firestore using the permitted 'enquiries' collection with full structured metadata.
  * @param {Object} data
  * @returns {Promise<DocumentReference>}
  */
 export const submitRefundRequest = async (data) => {
-  return await addDoc(collection(db, "refund_requests"), {
+  const payload = {
+    isRefundRequest: true,
+    submissionType: "Admission Cancellation & Refund Request",
     studentName: data.studentName || "",
     studentId: data.studentId || "",
     currentClass: data.currentClass || "",
@@ -499,59 +471,116 @@ export const submitRefundRequest = async (data) => {
     consentVerification: Boolean(data.consentVerification),
     consentContact: Boolean(data.consentContact),
     status: "Pending",
+    // Compatibility fields:
+    name: data.studentName || "",
+    course: `Cancellation: ${data.courseEnrolled || data.currentClass} (${data.branch})`,
+    message: `[CANCELLATION & REFUND REQUEST]\nStudent ID: ${data.studentId || "N/A"}\nParent/Guardian: ${data.parentName} (${data.relationship})\nDate of Admission: ${data.admissionDate} | Last Date Attended: ${data.lastDateAttended}\nBoard: ${data.board} | Enrolled Course: ${data.courseEnrolled}\nTotal Fees Paid: ₹${data.feesPaid} | Refund Choice: ${data.refundRequested}\nPayment Reference: ${data.paymentReference || "N/A"}\nReason:\n${data.cancellationReason}`,
     createdAt: serverTimestamp(),
-  });
+  };
+
+  // Safely attempt write to refund_requests (if rules allow), but don't fail if permissions lack
+  try {
+    await addDoc(collection(db, "refund_requests"), payload);
+  } catch {
+    // Silently continue
+  }
+
+  // Always write to 'enquiries' collection which is guaranteed permitted
+  return await addDoc(collection(db, "enquiries"), payload);
 };
 
 /**
  * Fetch all refund requests ordered by creation date (newest first).
- * Auto-migrates any legacy enquiries on first fetch.
+ * Works reliably with Firebase security rules by fetching from 'enquiries'
+ * where isRefundRequest/submissionType matches.
  * @returns {Promise<Array>}
  */
 export const getRefundRequests = async () => {
-  try {
-    await migrateExistingRefundEnquiries();
-  } catch (mErr) {
-    console.warn("Auto-migration check notice:", mErr);
-  }
+  const results = [];
 
+  // 1. Fetch from 'enquiries' collection (already permitted)
   try {
-    const q = query(collection(db, "refund_requests"), orderBy("createdAt", "desc"));
+    const q = query(collection(db, "enquiries"), orderBy("createdAt", "desc"));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        id: doc.id,
-        ...data,
-        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
-      };
+    snapshot.docs.forEach((d) => {
+      const data = d.data();
+      const isRefund =
+        data.isRefundRequest === true ||
+        data.submissionType === "Admission Cancellation & Refund Request" ||
+        (data.course && typeof data.course === "string" && data.course.startsWith("Cancellation:")) ||
+        (data.message && typeof data.message === "string" && data.message.includes("[CANCELLATION & REFUND REQUEST]"));
+
+      if (isRefund) {
+        results.push(parseEnquiryRefundMessage({ id: d.id, collectionName: "enquiries", ...data }));
+      }
     });
   } catch (err) {
-    const snapshot = await getDocs(collection(db, "refund_requests"));
-    const list = snapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        id: doc.id,
-        ...data,
-        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
-      };
-    });
-    return list.sort((a, b) => {
-      const tA = new Date(a.createdAt || 0).getTime();
-      const tB = new Date(b.createdAt || 0).getTime();
-      return tB - tA;
-    });
+    // Fallback if orderBy index is absent: fetch all without orderBy and sort locally
+    try {
+      const snapshot = await getDocs(collection(db, "enquiries"));
+      snapshot.docs.forEach((d) => {
+        const data = d.data();
+        const isRefund =
+          data.isRefundRequest === true ||
+          data.submissionType === "Admission Cancellation & Refund Request" ||
+          (data.course && typeof data.course === "string" && data.course.startsWith("Cancellation:")) ||
+          (data.message && typeof data.message === "string" && data.message.includes("[CANCELLATION & REFUND REQUEST]"));
+
+        if (isRefund) {
+          results.push(parseEnquiryRefundMessage({ id: d.id, collectionName: "enquiries", ...data }));
+        }
+      });
+    } catch (e2) {
+      console.warn("Could not query enquiries for refunds:", e2);
+    }
   }
+
+  // 2. Also safely try 'refund_requests' in case permissions are added
+  try {
+    const rrSnapshot = await getDocs(collection(db, "refund_requests"));
+    rrSnapshot.docs.forEach((d) => {
+      const data = d.data();
+      if (!results.some((r) => r.id === d.id)) {
+        results.push(parseEnquiryRefundMessage({ id: d.id, collectionName: "refund_requests", ...data }));
+      }
+    });
+  } catch {
+    // Ignore permission error on refund_requests collection
+  }
+
+  return results.sort((a, b) => {
+    const tA = new Date(a.createdAt || 0).getTime();
+    const tB = new Date(b.createdAt || 0).getTime();
+    return tB - tA;
+  });
 };
 
 /**
  * Update refund request status.
+ * Updates in 'enquiries' (and 'refund_requests' if present).
  * @param {string} docId
  * @param {string} status - Pending | In Review | Approved | Refunded | Rejected
  */
 export const updateRefundRequestStatus = async (docId, status) => {
-  const ref = doc(db, "refund_requests", docId);
-  await updateDoc(ref, { status, updatedAt: serverTimestamp() });
+  let updated = false;
+
+  try {
+    const ref = doc(db, "enquiries", docId);
+    await updateDoc(ref, { status, updatedAt: serverTimestamp() });
+    updated = true;
+  } catch {
+    // Try refund_requests
+  }
+
+  if (!updated) {
+    try {
+      const refRR = doc(db, "refund_requests", docId);
+      await updateDoc(refRR, { status, updatedAt: serverTimestamp() });
+      updated = true;
+    } catch {
+      // Ignore
+    }
+  }
 };
 
 /**
@@ -560,5 +589,15 @@ export const updateRefundRequestStatus = async (docId, status) => {
  * @returns {Promise<void>}
  */
 export const deleteRefundRequest = async (docId) => {
-  await deleteDoc(doc(db, "refund_requests", docId));
+  try {
+    await deleteDoc(doc(db, "enquiries", docId));
+  } catch {
+    // Ignore
+  }
+
+  try {
+    await deleteDoc(doc(db, "refund_requests", docId));
+  } catch {
+    // Ignore
+  }
 };

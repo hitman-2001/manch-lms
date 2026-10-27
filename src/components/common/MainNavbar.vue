@@ -11,10 +11,9 @@
             />
           </router-link>
         </div>
-        <!-- src="@/assets/logo.svg" -->
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center space-x-6">
+        <!-- Desktop & Tablet Menu -->
+        <div class="hidden md:flex items-center space-x-3 lg:space-x-6 text-sm lg:text-base">
           <router-link
             v-for="link in navLinks"
             :key="link.path"
@@ -26,13 +25,17 @@
           </router-link>
 
           <!-- Take Test Dropdown -->
-          <div class="relative group">
+          <div class="relative group" @mouseleave="isTakeTestOpen = false">
             <button
-              class="flex items-center text-gray-600 hover:text-primary transition-colors duration-200 font-medium focus:outline-none py-2"
+              type="button"
+              @click.stop="toggleTakeTest"
+              class="flex items-center text-gray-600 hover:text-primary transition-colors duration-200 font-medium focus:outline-none py-2 cursor-pointer"
+              :class="{ 'text-primary font-bold': isTakeTestOpen }"
             >
               <span>Take Test</span>
               <svg
-                class="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+                class="ml-1 h-4 w-4 transition-transform duration-200"
+                :class="{ 'rotate-180': isTakeTestOpen, 'group-hover:rotate-180': true }"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -48,12 +51,18 @@
 
             <!-- Dropdown Menu -->
             <div
-              class="absolute right-0 mt-1 w-56 bg-white border border-gray-100 rounded-lg shadow-xl py-1.5 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform scale-95 group-hover:scale-100 origin-top-right"
+              class="absolute right-0 mt-1 w-56 bg-white border border-gray-100 rounded-lg shadow-xl py-1.5 z-50 transition-all duration-200 transform origin-top-right"
+              :class="[
+                isTakeTestOpen
+                  ? 'opacity-100 visible scale-100 pointer-events-auto'
+                  : 'opacity-0 invisible scale-95 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:pointer-events-auto'
+              ]"
             >
               <a
                 href="https://manchiitjeeneet.exambro.app/auth/signIn"
                 target="_blank"
                 rel="noopener noreferrer"
+                @click="closeDropdowns"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
               >
                 Online Test Portal
@@ -62,6 +71,7 @@
               <a
                 href="/manch-classes.apk"
                 download
+                @click="closeDropdowns"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
               >
                 Download Android App (APK)
@@ -70,13 +80,17 @@
           </div>
 
           <!-- PayFees Dropdown -->
-          <div class="relative group">
+          <div class="relative group" @mouseleave="isPayFeesOpen = false">
             <button
-              class="flex items-center text-gray-600 hover:text-primary transition-colors duration-200 font-medium focus:outline-none py-2"
+              type="button"
+              @click.stop="togglePayFees"
+              class="flex items-center text-gray-600 hover:text-primary transition-colors duration-200 font-medium focus:outline-none py-2 cursor-pointer"
+              :class="{ 'text-primary font-bold': isPayFeesOpen }"
             >
               <span>PayFees</span>
               <svg
-                class="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+                class="ml-1 h-4 w-4 transition-transform duration-200"
+                :class="{ 'rotate-180': isPayFeesOpen, 'group-hover:rotate-180': true }"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -92,12 +106,18 @@
 
             <!-- Dropdown Menu -->
             <div
-              class="absolute right-0 mt-1 w-56 bg-white border border-gray-100 rounded-lg shadow-xl py-1.5 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform scale-95 group-hover:scale-100 origin-top-right"
+              class="absolute right-0 mt-1 w-56 bg-white border border-gray-100 rounded-lg shadow-xl py-1.5 z-50 transition-all duration-200 transform origin-top-right"
+              :class="[
+                isPayFeesOpen
+                  ? 'opacity-100 visible scale-100 pointer-events-auto'
+                  : 'opacity-0 invisible scale-95 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:pointer-events-auto'
+              ]"
             >
               <a
                 href="https://app.jodo.in/manch"
                 target="_blank"
                 rel="noopener noreferrer"
+                @click="closeDropdowns"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
               >
                 Parent Login
@@ -107,6 +127,7 @@
                 href="https://dashboard.jodo.in/login?next=%2Fdashboard%3Ffilters%3DcGFnZT0lMkY%3D"
                 target="_blank"
                 rel="noopener noreferrer"
+                @click="closeDropdowns"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary font-medium transition-colors"
               >
                 Manch Login (Staff)
@@ -116,7 +137,7 @@
 
           <router-link
             to="/admission"
-            class="bg-secondary hover:bg-secondary-dark text-white px-4 py-2 rounded-md font-semibold transition-colors duration-200 shadow-sm"
+            class="bg-secondary hover:bg-secondary-dark text-white px-3.5 lg:px-4 py-2 rounded-md font-semibold transition-colors duration-200 shadow-sm text-xs sm:text-sm lg:text-base whitespace-nowrap"
           >
             Admissions
           </router-link>
@@ -127,6 +148,7 @@
           <button
             @click="toggleMobileMenu"
             class="text-gray-600 hover:text-primary focus:outline-none"
+            aria-label="Toggle menu"
           >
             <svg
               class="h-6 w-6"
@@ -239,6 +261,8 @@ export default {
   data() {
     return {
       isMobileMenuOpen: false,
+      isTakeTestOpen: false,
+      isPayFeesOpen: false,
       navLinks: [
         { name: "Home", path: "/" },
         { name: "About", path: "/about" },
@@ -250,7 +274,38 @@ export default {
       ],
     };
   },
+  watch: {
+    $route() {
+      this.closeDropdowns();
+      this.closeMobileMenu();
+    },
+  },
+  mounted() {
+    this.handleOutsideClick = (e) => {
+      if (!this.$el.contains(e.target)) {
+        this.closeDropdowns();
+      }
+    };
+    document.addEventListener("click", this.handleOutsideClick);
+  },
+  beforeUnmount() {
+    if (this.handleOutsideClick) {
+      document.removeEventListener("click", this.handleOutsideClick);
+    }
+  },
   methods: {
+    toggleTakeTest() {
+      this.isTakeTestOpen = !this.isTakeTestOpen;
+      this.isPayFeesOpen = false;
+    },
+    togglePayFees() {
+      this.isPayFeesOpen = !this.isPayFeesOpen;
+      this.isTakeTestOpen = false;
+    },
+    closeDropdowns() {
+      this.isTakeTestOpen = false;
+      this.isPayFeesOpen = false;
+    },
     toggleMobileMenu() {
       this.isMobileMenuOpen = !this.isMobileMenuOpen;
     },
