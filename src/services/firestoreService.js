@@ -384,3 +384,42 @@ export const deleteStudent = async (docId) => {
 
 
 
+
+// ─── REFUND & CANCELLATION REQUESTS ──────────────────────────
+
+/**
+ * Submit an Admission Cancellation and Refund Request.
+ * @param {Object} data
+ * @returns {Promise<DocumentReference>}
+ */
+export const submitRefundRequest = async (data) => {
+  try {
+    await addDoc(collection(db, "refund_requests"), {
+      ...data,
+      status: "Pending",
+      createdAt: serverTimestamp(),
+    });
+  } catch (err) {
+    console.warn("Could not write to refund_requests collection:", err);
+  }
+
+  return await addDoc(collection(db, "enquiries"), {
+    name: data.studentName,
+    email: data.email || "",
+    phone: data.phone,
+    currentClass: data.currentClass || "",
+    course: `Cancellation: ${data.courseEnrolled || data.currentClass} (${data.branch})`,
+    branch: data.branch || "",
+    submissionType: "Admission Cancellation & Refund Request",
+    message: `[CANCELLATION & REFUND REQUEST]
+Student ID: ${data.studentId || "N/A"}
+Parent/Guardian: ${data.parentName} (${data.relationship})
+Date of Admission: ${data.admissionDate} | Last Date Attended: ${data.lastDateAttended}
+Board: ${data.board} | Enrolled Course: ${data.courseEnrolled}
+Total Fees Paid: ₹${data.feesPaid} | Refund Choice: ${data.refundRequested}
+Payment Reference: ${data.paymentReference || "N/A"}
+Reason:
+${data.cancellationReason}`,
+    createdAt: serverTimestamp(),
+  });
+};
