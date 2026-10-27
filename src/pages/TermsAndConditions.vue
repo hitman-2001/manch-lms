@@ -149,7 +149,7 @@
             <div class="pl-2 sm:pl-8">
               <ol class="space-y-2 list-decimal list-inside text-gray-700">
                 <li class="pl-1 leading-relaxed">
-                  Submit a formal cancellation request via the <strong>Submit Refund Request Form</strong> button below, or in person at our administrative office, or via email to <a href="mailto:contact@manchclasses.in" class="text-primary hover:underline font-semibold print:text-black">contact@manchclasses.in</a>.
+                  Submit a formal request via the <strong>Submit Your Concern</strong> button below, or in person at our administrative office, or via email to <a href="mailto:contact@manchclasses.in" class="text-primary hover:underline font-semibold print:text-black">contact@manchclasses.in</a>.
                 </li>
                 <li class="pl-1 leading-relaxed">
                   Provide verifiable student credentials: <strong>Student Full Name</strong>, <strong>Admission ID / Date</strong>, enrolled branch, and detailed reason for cancellation.
@@ -215,14 +215,14 @@
           <!-- Bottom CTA to open modal (The ONLY trigger to open the modal) -->
           <div class="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-50/90 p-5 rounded-2xl print:hidden">
             <div>
-              <h3 class="font-bold text-gray-900 text-sm">Ready to submit a request?</h3>
-              <p class="text-xs text-gray-500">Takes less than 2 minutes to fill out.</p>
+              <h3 class="font-bold text-gray-900 text-sm">Have a concern or query?</h3>
+              <p class="text-xs text-gray-500">Reach out to our student support and administrative team.</p>
             </div>
             <button
               @click="openModal"
               class="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm hover:shadow transition-all cursor-pointer active:scale-95 flex items-center gap-1.5"
             >
-              <span>Submit Refund Request Form</span>
+              <span>Submit Your Concern</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
