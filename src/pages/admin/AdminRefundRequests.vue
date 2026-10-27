@@ -1,101 +1,29 @@
 <template>
   <AdminLayout>
-    <div class="space-y-6">
-      <!-- Top KPI Stat Cards -->
-      <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <!-- Total -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 flex items-center gap-3">
-          <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center flex-shrink-0 font-bold text-sm">
-            <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
+    <div class="space-y-4">
+      <!-- Minimal Page Header -->
+      <div class="bg-white rounded-2xl shadow-xs border border-gray-200/80 p-4 sm:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
           <div>
-            <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ refundRequests.length }}</p>
-            <p class="text-xs text-gray-500 font-medium">Total Requests</p>
-          </div>
-        </div>
-
-        <!-- Pending -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 flex items-center gap-3">
-          <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 font-bold text-sm">
-            <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <p class="text-xl sm:text-2xl font-bold text-amber-600">{{ countByStatus('Pending') }}</p>
-            <p class="text-xs text-gray-500 font-medium">Pending</p>
-          </div>
-        </div>
-
-        <!-- In Review -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 flex items-center gap-3">
-          <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 font-bold text-sm">
-            <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-          </div>
-          <div>
-            <p class="text-xl sm:text-2xl font-bold text-blue-600">{{ countByStatus('In Review') }}</p>
-            <p class="text-xs text-gray-500 font-medium">In Review</p>
-          </div>
-        </div>
-
-        <!-- Refunded / Approved -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 flex items-center gap-3">
-          <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 font-bold text-sm">
-            <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <p class="text-xl sm:text-2xl font-bold text-emerald-600">
-              {{ countByStatus('Refunded') + countByStatus('Approved') }}
-            </p>
-            <p class="text-xs text-gray-500 font-medium">Approved / Refunded</p>
-          </div>
-        </div>
-
-        <!-- Total Claim Amount -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 flex items-center gap-3 col-span-2 lg:col-span-1">
-          <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 font-bold text-sm">
-            <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <p class="text-lg sm:text-xl font-bold text-purple-700">₹{{ totalFeesClaimed.toLocaleString('en-IN') }}</p>
-            <p class="text-xs text-gray-500 font-medium">Claimed Fees</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Content Card -->
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <!-- Page Header & Actions -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-          <div>
-            <h2 class="text-lg font-bold text-gray-800">Admission Cancellation & Refund Requests</h2>
-            <p class="text-xs text-gray-500 mt-1">
-              Verify cancellation particulars, track refund workflow, and contact parents directly.
+            <h2 class="text-base sm:text-lg font-bold text-gray-900">Refund Requests</h2>
+            <p class="text-xs text-gray-500 mt-0.5">
+              Review cancellation requests and track refund workflow.
             </p>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 self-start sm:self-auto">
             <button
               @click="exportToExcel"
               :disabled="filteredRequests.length === 0"
-              class="px-4 py-2 text-xs font-medium text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+              class="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 disabled:opacity-50 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
               </svg>
-              Download Excel
+              <span>Export</span>
             </button>
             <button
               @click="fetchRefundRequests"
-              class="px-4 py-2 text-xs font-medium text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+              class="px-3 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <svg
                 class="h-3.5 w-3.5"
@@ -103,52 +31,57 @@
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
               >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
               </svg>
-              Refresh
+              <span>Refresh</span>
             </button>
           </div>
         </div>
 
-        <!-- Search & Filters -->
-        <div class="mb-6 grid grid-cols-1 sm:grid-cols-12 gap-3">
-          <!-- Search box -->
-          <div class="relative sm:col-span-6 lg:col-span-6">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-              <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Minimal Status Filter Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 mb-4 text-xs scrollbar-none">
+          <button
+            v-for="status in statusTabs"
+            :key="status.key"
+            @click="selectedStatus = status.key"
+            class="px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer whitespace-nowrap"
+            :class="[
+              selectedStatus === status.key
+                ? 'bg-blue-600 text-white shadow-xs font-semibold'
+                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            ]"
+          >
+            {{ status.label }}
+            <span
+              class="ml-1 px-1.5 py-0.2 rounded-full text-[10px]"
+              :class="selectedStatus === status.key ? 'bg-white/25 text-white' : 'bg-gray-200/70 text-gray-700'"
+            >
+              {{ status.count }}
+            </span>
+          </button>
+        </div>
+
+        <!-- Search & Month Controls -->
+        <div class="flex flex-col sm:flex-row gap-2.5 pt-1">
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </span>
             <input
               type="text"
               v-model="searchQuery"
-              placeholder="Search by student, ID, parent, phone, email, course..."
-              class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="Search by student, ID, phone, email, course..."
+              class="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:bg-white focus:border-blue-500 transition-all"
             />
           </div>
 
-          <!-- Status Filter -->
-          <div class="sm:col-span-3 lg:col-span-3">
-            <select
-              v-model="selectedStatus"
-              class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all bg-white"
-            >
-              <option value="All">All Statuses</option>
-              <option value="Pending">Pending</option>
-              <option value="In Review">In Review</option>
-              <option value="Approved">Approved</option>
-              <option value="Refunded">Refunded</option>
-              <option value="Rejected">Rejected</option>
-            </select>
-          </div>
-
-          <!-- Month Filter Dropdown -->
-          <div class="sm:col-span-3 lg:col-span-3">
+          <div v-if="availableMonths.length > 1" class="w-full sm:w-44 flex-shrink-0">
             <select
               v-model="selectedMonth"
-              class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all bg-white"
+              class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:bg-white focus:border-blue-500 transition-all bg-white"
             >
               <option value="All Months">All Months</option>
               <option v-for="month in availableMonths.slice(1)" :key="month" :value="month">
@@ -157,172 +90,211 @@
             </select>
           </div>
         </div>
+      </div>
 
+      <!-- Main Content Container -->
+      <div class="bg-white rounded-2xl shadow-xs border border-gray-200/80 overflow-hidden">
         <!-- Loading State -->
         <div v-if="loading" class="py-16 flex flex-col items-center justify-center">
-          <svg class="animate-spin h-8 w-8 text-blue-600 mb-3" fill="none" viewBox="0 0 24 24">
+          <svg class="animate-spin h-7 w-7 text-blue-600 mb-2" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
           </svg>
-          <span class="text-sm text-gray-500 font-medium">Fetching refund requests...</span>
+          <span class="text-xs text-gray-500 font-medium">Loading requests...</span>
         </div>
 
         <!-- Empty State -->
-        <div v-else-if="filteredRequests.length === 0" class="py-16 text-center">
-          <div class="h-16 w-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div v-else-if="filteredRequests.length === 0" class="py-16 text-center px-4">
+          <div class="h-12 w-12 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-3 text-gray-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
           <h3 class="font-semibold text-gray-800 text-sm">No refund requests found</h3>
           <p class="text-xs text-gray-400 mt-1 max-w-xs mx-auto">
-            {{ searchQuery || selectedStatus !== 'All' ? "Try adjusting your filters or keyword query." : "When students or parents submit cancellation requests, they will appear here." }}
+            {{ searchQuery || selectedStatus !== 'All' ? 'Try adjusting your search or status filter.' : 'When students submit refund requests, they will show up here.' }}
           </p>
         </div>
 
-        <!-- Table View -->
-        <div v-else class="overflow-x-auto -mx-6">
-          <table class="w-full text-left border-collapse min-w-[950px]">
+        <!-- 1. Mobile Cards View (< md) -->
+        <div v-else class="md:hidden divide-y divide-gray-100">
+          <div
+            v-for="item in filteredRequests"
+            :key="item.id"
+            class="p-4 space-y-3 hover:bg-gray-50/50 transition-colors"
+          >
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h3 class="text-sm font-bold text-gray-900 leading-snug">{{ item.studentName }}</h3>
+                <p class="text-[11px] text-gray-500 mt-0.5">
+                  <span class="font-mono font-semibold">#{{ item.studentId }}</span>
+                  <span> • </span>
+                  <span>{{ item.currentClass }}</span>
+                  <span v-if="item.branch"> ({{ item.branch }})</span>
+                </p>
+              </div>
+
+              <!-- Status selector on mobile -->
+              <select
+                :value="item.status || 'Pending'"
+                @change="handleStatusChange(item, $event.target.value)"
+                class="px-2 py-0.5 text-[11px] font-semibold rounded-full border outline-none cursor-pointer"
+                :class="statusBadgeClasses(item.status || 'Pending')"
+              >
+                <option value="Pending">Pending</option>
+                <option value="In Review">In Review</option>
+                <option value="Approved">Approved</option>
+                <option value="Refunded">Refunded</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-gray-600 bg-gray-50 p-2.5 rounded-xl">
+              <div>
+                <span class="text-gray-400 text-[10px] block">Fees Claimed</span>
+                <span class="font-bold text-gray-900 text-sm">₹{{ Number(item.feesPaid || 0).toLocaleString('en-IN') }}</span>
+              </div>
+              <div class="text-right">
+                <span class="text-gray-400 text-[10px] block">Submitted</span>
+                <span class="text-gray-600">{{ formatDate(item.createdAt) }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <a
+                v-if="item.phone"
+                :href="'tel:' + item.phone"
+                class="text-xs text-blue-600 font-semibold flex items-center gap-1"
+              >
+                📞 {{ item.phone }}
+              </a>
+              <span v-else class="text-xs text-gray-400">{{ item.parentName }}</span>
+
+              <div class="flex items-center gap-1.5">
+                <button
+                  @click="openDetails(item)"
+                  class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg text-xs font-semibold transition-colors"
+                >
+                  View Details
+                </button>
+                <button
+                  @click="confirmDelete(item)"
+                  class="p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                  title="Delete"
+                >
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Desktop & Tablet Clean Minimal Table (md:block) -->
+        <div v-if="filteredRequests.length > 0" class="hidden md:block overflow-x-auto">
+          <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-gray-50 border-y border-gray-100">
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Student & ID</th>
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Parent Details</th>
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Cancellation & Reason</th>
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Fees & Refund</th>
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Submitted</th>
-                <th class="px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+              <tr class="bg-gray-50/80 border-b border-gray-100 text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+                <th class="px-5 py-3">Student</th>
+                <th class="px-5 py-3">Parent</th>
+                <th class="px-5 py-3">Reason</th>
+                <th class="px-5 py-3">Fees</th>
+                <th class="px-5 py-3">Status</th>
+                <th class="px-5 py-3">Date</th>
+                <th class="px-5 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
+            <tbody class="divide-y divide-gray-100 text-xs">
               <tr
                 v-for="item in filteredRequests"
                 :key="item.id"
-                class="hover:bg-gray-50/60 transition-colors group"
+                class="hover:bg-gray-50/70 transition-colors"
               >
-                <!-- Student & ID -->
-                <td class="px-6 py-4">
-                  <div class="font-bold text-gray-900 text-sm flex items-center gap-2">
-                    {{ item.studentName || 'Unknown Student' }}
-                    <span v-if="item.studentId" class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px] font-mono font-semibold">
-                      ID: {{ item.studentId }}
-                    </span>
-                  </div>
-                  <div class="flex flex-wrap items-center gap-1.5 mt-1.5">
-                    <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md text-[10px] font-semibold border border-blue-100">
-                      {{ item.currentClass || 'Class N/A' }} {{ item.board ? `(${item.board})` : '' }}
-                    </span>
-                    <span v-if="item.branch" class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded-md text-[10px] font-medium border border-purple-100">
-                      {{ item.branch }}
-                    </span>
+                <!-- Student -->
+                <td class="px-5 py-3.5">
+                  <div class="font-semibold text-gray-900 text-sm leading-snug">{{ item.studentName }}</div>
+                  <div class="text-[11px] text-gray-500 mt-0.5">
+                    <span class="font-mono font-medium text-gray-600">#{{ item.studentId }}</span>
+                    <span> • </span>
+                    <span>{{ item.currentClass }}</span>
+                    <span v-if="item.branch"> • {{ item.branch }}</span>
                   </div>
                 </td>
 
-                <!-- Parent Details -->
-                <td class="px-6 py-4">
-                  <div class="font-medium text-gray-800 text-xs">
-                    {{ item.parentName || 'Parent / Guardian' }}
-                    <span v-if="item.relationship" class="text-gray-400">({{ item.relationship }})</span>
-                  </div>
-                  <div class="flex flex-col gap-1 mt-1.5">
-                    <a
-                      v-if="item.phone"
-                      :href="'tel:' + item.phone"
-                      class="text-xs text-gray-600 hover:text-blue-600 font-medium flex items-center gap-1 w-max"
-                    >
-                      <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      {{ item.phone }}
-                    </a>
-                    <a
-                      v-if="item.email"
-                      :href="'mailto:' + item.email"
-                      class="text-[11px] text-gray-400 hover:text-blue-600 flex items-center gap-1 w-max truncate max-w-[150px]"
-                    >
-                      <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                      {{ item.email }}
-                    </a>
-                  </div>
+                <!-- Parent -->
+                <td class="px-5 py-3.5 whitespace-nowrap">
+                  <div class="font-medium text-gray-800">{{ item.parentName }}</div>
+                  <a
+                    v-if="item.phone"
+                    :href="'tel:' + item.phone"
+                    class="text-[11px] text-blue-600 hover:underline block mt-0.5"
+                  >
+                    {{ item.phone }}
+                  </a>
                 </td>
 
-                <!-- Cancellation Info & Reason -->
-                <td class="px-6 py-4 max-w-xs">
-                  <div class="text-xs font-semibold text-gray-700 truncate">
-                    {{ item.courseEnrolled || 'General Admission' }}
-                  </div>
-                  <div class="text-[11px] text-gray-400 mt-0.5">
-                    Last Attended: <span class="text-gray-600 font-medium">{{ item.lastDateAttended || '—' }}</span>
-                  </div>
-                  <p class="text-xs text-gray-500 line-clamp-1 mt-1 leading-relaxed">
+                <!-- Reason (Compact 1-liner with trigger) -->
+                <td class="px-5 py-3.5 max-w-[200px]">
+                  <div class="text-gray-600 truncate" :title="item.cancellationReason">
                     {{ item.cancellationReason || '—' }}
-                  </p>
+                  </div>
                   <button
                     @click="openDetails(item)"
-                    class="text-[11px] font-bold text-blue-600 hover:underline mt-1 block"
+                    class="text-[10px] font-bold text-gray-400 hover:text-blue-600 mt-0.5 block"
                   >
-                    Read full reason
+                    View details
                   </button>
                 </td>
 
-                <!-- Fees Paid & Refund Option -->
-                <td class="px-6 py-4">
-                  <div class="text-sm font-bold text-gray-900">
+                <!-- Fees -->
+                <td class="px-5 py-3.5 whitespace-nowrap">
+                  <div class="font-bold text-gray-900 text-sm">
                     ₹{{ Number(item.feesPaid || 0).toLocaleString('en-IN') }}
                   </div>
-                  <div class="text-[11px] text-emerald-700 font-medium mt-0.5">
-                    {{ item.refundRequested || 'Refund Requested' }}
-                  </div>
-                  <div v-if="item.paymentReference && item.paymentReference !== 'N/A'" class="text-[10px] text-gray-400 mt-0.5 font-mono">
-                    Ref: {{ item.paymentReference }}
+                  <div v-if="item.paymentReference && item.paymentReference !== 'N/A'" class="text-[10px] text-gray-400 font-mono mt-0.5">
+                    {{ item.paymentReference }}
                   </div>
                 </td>
 
-                <!-- Status Badge & Selector -->
-                <td class="px-6 py-4">
-                  <div class="relative inline-block text-left">
-                    <select
-                      :value="item.status || 'Pending'"
-                      @change="handleStatusChange(item, $event.target.value)"
-                      class="px-2.5 py-1 text-xs font-bold rounded-full border outline-none cursor-pointer transition-all"
-                      :class="statusBadgeClasses(item.status || 'Pending')"
-                    >
-                      <option value="Pending">Pending</option>
-                      <option value="In Review">In Review</option>
-                      <option value="Approved">Approved</option>
-                      <option value="Refunded">Refunded</option>
-                      <option value="Rejected">Rejected</option>
-                    </select>
-                  </div>
+                <!-- Status Selector -->
+                <td class="px-5 py-3.5 whitespace-nowrap">
+                  <select
+                    :value="item.status || 'Pending'"
+                    @change="handleStatusChange(item, $event.target.value)"
+                    class="px-2.5 py-1 text-xs font-semibold rounded-full border outline-none cursor-pointer transition-colors"
+                    :class="statusBadgeClasses(item.status || 'Pending')"
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="In Review">In Review</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Refunded">Refunded</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
                 </td>
 
-                <!-- Submitted Date -->
-                <td class="px-6 py-4 text-xs text-gray-500 font-medium whitespace-nowrap">
-                  {{ formatDate(item.createdAt, true) }}
+                <!-- Date -->
+                <td class="px-5 py-3.5 text-gray-500 whitespace-nowrap">
+                  {{ formatDate(item.createdAt) }}
                 </td>
 
                 <!-- Actions -->
-                <td class="px-6 py-4 text-right whitespace-nowrap">
-                  <div class="flex items-center justify-end gap-1.5">
-                    <!-- View details button -->
+                <td class="px-5 py-3.5 text-right whitespace-nowrap">
+                  <div class="flex items-center justify-end gap-1">
                     <button
                       @click="openDetails(item)"
-                      class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all cursor-pointer"
-                      title="View all details"
+                      class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                      title="View Full Details"
                     >
                       <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                       </svg>
                     </button>
-
-                    <!-- Delete button -->
                     <button
                       @click="confirmDelete(item)"
-                      class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all cursor-pointer"
-                      title="Delete record"
+                      class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                      title="Delete"
                     >
                       <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -337,27 +309,25 @@
       </div>
     </div>
 
-    <!-- Complete Details Modal -->
+    <!-- Minimal Details Modal -->
     <div
       v-if="selectedRequest"
-      class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs transition-opacity overflow-y-auto"
+      class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3 sm:p-4 backdrop-blur-xs transition-opacity overflow-y-auto"
       @click.self="selectedRequest = null"
     >
-      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden border border-gray-100 my-8 animate-in fade-in zoom-in-95 duration-150">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-xl overflow-hidden border border-gray-200 my-6 animate-in fade-in zoom-in-95 duration-150">
         <!-- Modal Header -->
-        <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-6 py-5 text-white flex items-center justify-between">
+        <div class="bg-gray-900 px-5 sm:px-6 py-4 text-white flex items-center justify-between">
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="font-bold text-base sm:text-lg">{{ selectedRequest.studentName }}</h3>
-              <span v-if="selectedRequest.studentId" class="px-2 py-0.5 bg-white/20 rounded text-xs font-mono font-semibold">
-                ID: {{ selectedRequest.studentId }}
+              <h3 class="font-bold text-base">{{ selectedRequest.studentName }}</h3>
+              <span class="px-2 py-0.5 bg-white/15 rounded text-[11px] font-mono font-medium">
+                #{{ selectedRequest.studentId }}
               </span>
             </div>
-            <p class="text-xs text-blue-100 mt-1">
-              Cancellation & Refund Request • Submitted {{ formatDate(selectedRequest.createdAt, true) }}
-            </p>
+            <p class="text-xs text-gray-400 mt-0.5">Submitted {{ formatDate(selectedRequest.createdAt, true) }}</p>
           </div>
-          <button @click="selectedRequest = null" class="text-white/80 hover:text-white transition-colors cursor-pointer p-1">
+          <button @click="selectedRequest = null" class="text-gray-400 hover:text-white p-1">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -365,179 +335,115 @@
         </div>
 
         <!-- Modal Body -->
-        <div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto text-sm">
-          <!-- Status Ribbon inside Modal -->
-          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <span class="text-xs text-gray-500 font-medium">Current Status:</span>
-              <div class="font-bold text-gray-800 text-sm mt-0.5">
-                {{ selectedRequest.status || 'Pending' }}
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <label class="text-xs text-gray-600 font-medium">Update:</label>
-              <select
-                :value="selectedRequest.status || 'Pending'"
-                @change="handleStatusChange(selectedRequest, $event.target.value)"
-                class="px-3 py-1.5 text-xs font-bold rounded-lg border outline-none bg-white cursor-pointer"
-              >
-                <option value="Pending">Pending</option>
-                <option value="In Review">In Review</option>
-                <option value="Approved">Approved</option>
-                <option value="Refunded">Refunded</option>
-                <option value="Rejected">Rejected</option>
-              </select>
-            </div>
+        <div class="p-5 sm:p-6 space-y-5 text-xs max-h-[75vh] overflow-y-auto">
+          <!-- Status Selector Bar -->
+          <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-between">
+            <span class="text-gray-600 font-medium">Workflow Status:</span>
+            <select
+              :value="selectedRequest.status || 'Pending'"
+              @change="handleStatusChange(selectedRequest, $event.target.value)"
+              class="px-3 py-1 font-bold rounded-lg border outline-none bg-white cursor-pointer"
+              :class="statusBadgeClasses(selectedRequest.status || 'Pending')"
+            >
+              <option value="Pending">Pending</option>
+              <option value="In Review">In Review</option>
+              <option value="Approved">Approved</option>
+              <option value="Refunded">Refunded</option>
+              <option value="Rejected">Rejected</option>
+            </select>
           </div>
 
-          <!-- Section A: Student Information -->
+          <!-- Student & Academic -->
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 mb-3 flex items-center gap-2">
-              <span class="h-5 w-5 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[10px]">A</span>
-              Student Information
-            </h4>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-gray-50/70 p-4 rounded-xl text-xs">
+            <h4 class="font-bold text-gray-400 uppercase tracking-wider text-[10px] mb-2">Student & Academic Details</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 bg-gray-50/70 p-3.5 rounded-xl">
               <div>
-                <span class="text-gray-400 block">Student Name</span>
+                <span class="text-gray-400 block text-[10px]">Student Name</span>
                 <span class="font-semibold text-gray-800">{{ selectedRequest.studentName }}</span>
               </div>
               <div>
-                <span class="text-gray-400 block">Student ID / Roll</span>
-                <span class="font-semibold text-gray-800 font-mono">{{ selectedRequest.studentId || 'N/A' }}</span>
-              </div>
-              <div>
-                <span class="text-gray-400 block">Class & Board</span>
+                <span class="text-gray-400 block text-[10px]">Class & Board</span>
                 <span class="font-semibold text-gray-800">{{ selectedRequest.currentClass }} ({{ selectedRequest.board }})</span>
               </div>
               <div>
-                <span class="text-gray-400 block">Enrolled Branch</span>
+                <span class="text-gray-400 block text-[10px]">Branch</span>
                 <span class="font-semibold text-gray-800">{{ selectedRequest.branch }}</span>
               </div>
               <div class="col-span-2">
-                <span class="text-gray-400 block">Enrolled Course / Batch</span>
+                <span class="text-gray-400 block text-[10px]">Enrolled Course</span>
                 <span class="font-semibold text-gray-800">{{ selectedRequest.courseEnrolled }}</span>
+              </div>
+              <div>
+                <span class="text-gray-400 block text-[10px]">Admission Date</span>
+                <span class="font-semibold text-gray-800">{{ selectedRequest.admissionDate || 'N/A' }}</span>
               </div>
             </div>
           </div>
 
-          <!-- Section B: Parent / Guardian Information -->
+          <!-- Parent Contact -->
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 mb-3 flex items-center gap-2">
-              <span class="h-5 w-5 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[10px]">B</span>
-              Parent / Guardian Details
-            </h4>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-gray-50/70 p-4 rounded-xl text-xs">
+            <h4 class="font-bold text-gray-400 uppercase tracking-wider text-[10px] mb-2">Parent / Guardian Contact</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-gray-50/70 p-3.5 rounded-xl">
               <div>
-                <span class="text-gray-400 block">Parent Name</span>
+                <span class="text-gray-400 block text-[10px]">Parent Name</span>
                 <span class="font-semibold text-gray-800">{{ selectedRequest.parentName }} ({{ selectedRequest.relationship }})</span>
               </div>
               <div>
-                <span class="text-gray-400 block">Phone Number</span>
-                <a :href="'tel:' + selectedRequest.phone" class="font-semibold text-blue-600 hover:underline flex items-center gap-1 mt-0.5">
-                  📞 {{ selectedRequest.phone }}
+                <span class="text-gray-400 block text-[10px]">Mobile Phone</span>
+                <a :href="'tel:' + selectedRequest.phone" class="font-semibold text-blue-600 hover:underline">
+                  {{ selectedRequest.phone }}
                 </a>
               </div>
               <div>
-                <span class="text-gray-400 block">Email Address</span>
-                <a :href="'mailto:' + selectedRequest.email" class="font-semibold text-blue-600 hover:underline flex items-center gap-1 mt-0.5 truncate">
-                  ✉️ {{ selectedRequest.email || 'N/A' }}
+                <span class="text-gray-400 block text-[10px]">Email Address</span>
+                <a :href="'mailto:' + selectedRequest.email" class="font-semibold text-blue-600 hover:underline truncate block">
+                  {{ selectedRequest.email || 'N/A' }}
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- Section C: Cancellation Particulars -->
+          <!-- Fees & Cancellation -->
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 mb-3 flex items-center gap-2">
-              <span class="h-5 w-5 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[10px]">C</span>
-              Cancellation Particulars & Reason
-            </h4>
-            <div class="space-y-3 bg-gray-50/70 p-4 rounded-xl text-xs">
-              <div class="grid grid-cols-2 gap-3 pb-2 border-b border-gray-200">
+            <h4 class="font-bold text-gray-400 uppercase tracking-wider text-[10px] mb-2">Financials & Cancellation Reason</h4>
+            <div class="bg-gray-50/70 p-3.5 rounded-xl space-y-2.5">
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-2 border-b border-gray-200">
                 <div>
-                  <span class="text-gray-400 block">Date of Admission</span>
-                  <span class="font-semibold text-gray-800">{{ selectedRequest.admissionDate }}</span>
+                  <span class="text-gray-400 block text-[10px]">Total Fees Paid</span>
+                  <span class="text-sm font-bold text-gray-900">₹{{ selectedRequest.feesPaid }}</span>
                 </div>
                 <div>
-                  <span class="text-gray-400 block">Last Date Attended / Effective Date</span>
-                  <span class="font-semibold text-gray-800">{{ selectedRequest.lastDateAttended }}</span>
+                  <span class="text-gray-400 block text-[10px]">Last Date Attended</span>
+                  <span class="font-semibold text-gray-800">{{ selectedRequest.lastDateAttended || 'N/A' }}</span>
+                </div>
+                <div>
+                  <span class="text-gray-400 block text-[10px]">Payment Reference</span>
+                  <span class="font-mono text-gray-700">{{ selectedRequest.paymentReference || 'N/A' }}</span>
                 </div>
               </div>
+
               <div>
-                <span class="text-gray-400 block mb-1">Detailed Reason for Cancellation</span>
-                <p class="text-gray-800 font-medium whitespace-pre-line leading-relaxed bg-white p-3 rounded-lg border border-gray-100">
-                  {{ selectedRequest.cancellationReason || 'No reason specified.' }}
+                <span class="text-gray-400 block text-[10px] mb-1">Reason for Cancellation:</span>
+                <p class="text-gray-800 bg-white p-3 rounded-lg border border-gray-200 leading-relaxed whitespace-pre-line">
+                  {{ selectedRequest.cancellationReason || 'No reason provided.' }}
                 </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section D: Fees & Refund Request Details -->
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 mb-3 flex items-center gap-2">
-              <span class="h-5 w-5 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[10px]">D</span>
-              Financial & Payment Details
-            </h4>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-gray-50/70 p-4 rounded-xl text-xs">
-              <div>
-                <span class="text-gray-400 block">Total Fees Paid</span>
-                <span class="text-base font-bold text-gray-900">₹{{ selectedRequest.feesPaid }}</span>
-              </div>
-              <div>
-                <span class="text-gray-400 block">Refund Option</span>
-                <span class="font-semibold text-emerald-700">{{ selectedRequest.refundRequested }}</span>
-              </div>
-              <div>
-                <span class="text-gray-400 block">Payment / Receipt Reference</span>
-                <span class="font-semibold text-gray-800 font-mono">{{ selectedRequest.paymentReference || 'N/A' }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section E: Review & Consents -->
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-blue-700 mb-3 flex items-center gap-2">
-              <span class="h-5 w-5 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[10px]">E</span>
-              Consent & Declarations
-            </h4>
-            <div class="space-y-2 bg-emerald-50/50 border border-emerald-100 p-3.5 rounded-xl text-xs text-gray-700">
-              <div class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>Confirmed accuracy and parent/guardian authority</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>Acknowledged deductions and institute refund policy verification</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>Authorized Manch Science Classes administrative contact</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Modal Footer -->
-        <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <a
-              :href="'tel:' + selectedRequest.phone"
-              class="px-4 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5"
-            >
-              📞 Call Parent
-            </a>
-            <a
-              v-if="selectedRequest.email"
-              :href="'mailto:' + selectedRequest.email"
-              class="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5"
-            >
-              ✉️ Email Parent
-            </a>
-          </div>
-
+        <div class="bg-gray-50 px-5 sm:px-6 py-3 border-t border-gray-200 flex items-center justify-between">
+          <a
+            v-if="selectedRequest.phone"
+            :href="'tel:' + selectedRequest.phone"
+            class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-xs font-semibold"
+          >
+            📞 Call Parent
+          </a>
           <button
             @click="selectedRequest = null"
-            class="px-5 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
+            class="px-4 py-1.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-xs font-semibold cursor-pointer ml-auto"
           >
             Close
           </button>
@@ -545,39 +451,30 @@
       </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
+    <!-- Minimal Delete Confirmation Modal -->
     <div
       v-if="deleteTarget"
-      class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs transition-opacity"
+      class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs"
       @click.self="deleteTarget = null"
     >
-      <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center animate-in fade-in zoom-in-95 duration-150">
-        <div class="h-12 w-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-        </div>
-        <h3 class="font-bold text-gray-900 text-base mb-1">Delete Refund Request?</h3>
-        <p class="text-xs text-gray-500 mb-6">
-          Are you sure you want to delete the refund request for <strong>{{ deleteTarget.studentName }}</strong>? This action cannot be undone.
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-5 text-center">
+        <h3 class="font-bold text-gray-900 text-sm mb-1">Delete Request?</h3>
+        <p class="text-xs text-gray-500 mb-4">
+          Delete refund request for <strong>{{ deleteTarget.studentName }}</strong>?
         </p>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
           <button
             @click="deleteTarget = null"
-            class="flex-1 py-2.5 border border-gray-200 text-gray-700 hover:bg-gray-50 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+            class="flex-1 py-2 border border-gray-200 text-gray-700 rounded-xl text-xs font-semibold hover:bg-gray-50"
           >
             Cancel
           </button>
           <button
             @click="handleDelete"
             :disabled="deleting"
-            class="flex-1 py-2.5 bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+            class="flex-1 py-2 bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white rounded-xl text-xs font-bold"
           >
-            <svg v-if="deleting" class="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-            </svg>
-            {{ deleting ? "Deleting..." : "Confirm Delete" }}
+            {{ deleting ? 'Deleting...' : 'Delete' }}
           </button>
         </div>
       </div>
@@ -610,11 +507,22 @@ export default {
     };
   },
   computed: {
-    totalFeesClaimed() {
-      return this.refundRequests.reduce((acc, curr) => {
-        const val = Number(curr.feesPaid || 0);
-        return acc + (isNaN(val) ? 0 : val);
-      }, 0);
+    statusTabs() {
+      const all = this.refundRequests.length;
+      const pending = this.countByStatus("Pending");
+      const inReview = this.countByStatus("In Review");
+      const approved = this.countByStatus("Approved");
+      const refunded = this.countByStatus("Refunded");
+      const rejected = this.countByStatus("Rejected");
+
+      return [
+        { key: "All", label: "All", count: all },
+        { key: "Pending", label: "Pending", count: pending },
+        { key: "In Review", label: "In Review", count: inReview },
+        { key: "Approved", label: "Approved", count: approved },
+        { key: "Refunded", label: "Refunded", count: refunded },
+        { key: "Rejected", label: "Rejected", count: rejected },
+      ];
     },
     filteredRequests() {
       let list = this.refundRequests;
@@ -634,7 +542,7 @@ export default {
         });
       }
 
-      // Search query filter
+      // Search keyword
       if (this.searchQuery.trim()) {
         const q = this.searchQuery.toLowerCase();
         list = list.filter(
@@ -646,8 +554,7 @@ export default {
             item.email?.toLowerCase().includes(q) ||
             item.branch?.toLowerCase().includes(q) ||
             item.courseEnrolled?.toLowerCase().includes(q) ||
-            item.currentClass?.toLowerCase().includes(q) ||
-            item.paymentReference?.toLowerCase().includes(q)
+            item.currentClass?.toLowerCase().includes(q)
         );
       }
       return list;
@@ -684,15 +591,15 @@ export default {
     statusBadgeClasses(status) {
       switch (status) {
         case "Pending":
-          return "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100";
+          return "bg-amber-50 text-amber-700 border-amber-200/80";
         case "In Review":
-          return "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100";
+          return "bg-blue-50 text-blue-700 border-blue-200/80";
         case "Approved":
-          return "bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100";
+          return "bg-purple-50 text-purple-700 border-purple-200/80";
         case "Refunded":
-          return "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100";
+          return "bg-emerald-50 text-emerald-700 border-emerald-200/80";
         case "Rejected":
-          return "bg-red-50 text-red-700 border-red-200 hover:bg-red-100";
+          return "bg-red-50 text-red-700 border-red-200/80";
         default:
           return "bg-gray-50 text-gray-700 border-gray-200";
       }
@@ -706,7 +613,7 @@ export default {
 
       try {
         await updateRefundRequestStatus(item.id, newStatus);
-        showSuccess("Status Updated", `Request for ${item.studentName} marked as ${newStatus}.`);
+        showSuccess("Status Updated", `${item.studentName} is now ${newStatus}.`);
       } catch (err) {
         item.status = oldStatus;
         if (this.selectedRequest && this.selectedRequest.id === item.id) {
@@ -726,7 +633,7 @@ export default {
       this.deleting = true;
       try {
         await deleteRefundRequest(this.deleteTarget.id);
-        showSuccess("Request Deleted", "Refund record successfully removed.");
+        showSuccess("Deleted", "Refund record removed.");
         this.refundRequests = this.refundRequests.filter((item) => item.id !== this.deleteTarget.id);
         if (this.selectedRequest?.id === this.deleteTarget.id) {
           this.selectedRequest = null;
@@ -759,19 +666,14 @@ export default {
         "Class",
         "Board",
         "Branch",
-        "Course Enrolled",
-        "Admission Date",
-        "Last Date Attended",
-        "Parent Name",
-        "Relationship",
+        "Course",
+        "Parent",
         "Phone",
         "Email",
-        "Total Fees Paid",
-        "Refund Requested",
-        "Payment Reference",
+        "Fees Paid",
         "Status",
-        "Submission Date",
-        "Cancellation Reason",
+        "Date",
+        "Reason",
       ];
 
       const rows = this.filteredRequests.map((item) => [
@@ -781,15 +683,10 @@ export default {
         item.board || "",
         item.branch || "",
         item.courseEnrolled || "",
-        item.admissionDate || "",
-        item.lastDateAttended || "",
         item.parentName || "",
-        item.relationship || "",
         item.phone || "",
         item.email || "",
         item.feesPaid || "",
-        item.refundRequested || "",
-        item.paymentReference || "",
         item.status || "Pending",
         this.formatDate(item.createdAt, true),
         item.cancellationReason || "",
@@ -812,9 +709,8 @@ export default {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showSuccess("Excel Exported", "Refund requests exported to CSV successfully.");
+      showSuccess("Excel Exported", "Refund requests downloaded.");
     },
   },
 };
 </script>
-
