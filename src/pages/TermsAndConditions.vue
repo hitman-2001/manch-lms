@@ -49,25 +49,6 @@
             Terms, Conditions & Fees Refund Policy
           </div>
 
-          <!-- Document Control Reference Bar (International Standard) -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-6 pt-4 border-t border-gray-100 text-[11px] text-gray-500 print:border-t print:border-gray-300 print:text-[10px]">
-            <div>
-              <span class="block text-gray-400 font-medium">Document ID:</span>
-              <strong class="text-gray-800 font-mono">MSC/POL/2026-27/01</strong>
-            </div>
-            <div>
-              <span class="block text-gray-400 font-medium">Academic Session:</span>
-              <strong class="text-gray-800">2026 – 2027</strong>
-            </div>
-            <div>
-              <span class="block text-gray-400 font-medium">Admin Office:</span>
-              <strong class="text-gray-800">Vasai & Nallasopara</strong>
-            </div>
-            <div>
-              <span class="block text-gray-400 font-medium">Official Contact:</span>
-              <strong class="text-gray-800">contact@manchclasses.in</strong>
-            </div>
-          </div>
         </div>
 
         <!-- Policy Body Content -->
