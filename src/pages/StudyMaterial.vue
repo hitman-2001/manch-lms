@@ -261,7 +261,7 @@
                 'text-xs px-2 py-1 rounded font-semibold uppercase flex-shrink-0',
                 mat.type === 'pdf'
                   ? 'bg-red-100 text-red-700'
-                  : 'bg-blue-100 text-blue-700',
+                  : 'bg-primary-100 text-primary-dark',
               ]"
             >
               {{ mat.type }}
@@ -273,7 +273,7 @@
             <select
               :value="mat.standard"
               @change="saveMatField(mat, 'standard', $event.target.value)"
-              class="text-xs text-blue-600 bg-transparent border-b border-transparent hover:border-amber-300 focus:outline-none transition flex-1"
+              class="text-xs text-primary-dark bg-transparent border-b border-transparent hover:border-amber-300 focus:outline-none transition flex-1"
             >
               <option v-for="std in standards.slice(1)" :key="std" :value="std">
                 {{ std }}
@@ -404,7 +404,7 @@
                 'p-2 rounded-xl',
                 previewTarget.type === 'pdf'
                   ? 'bg-red-50 text-red-600'
-                  : 'bg-blue-50 text-blue-600',
+                  : 'bg-primary-50 text-primary-dark',
               ]"
             >
               <svg
@@ -476,11 +476,11 @@
           >
             <!-- Slim info bar -->
             <!-- <div
-              class="bg-blue-50 px-4 py-2 text-[10px] text-blue-700 flex items-center justify-between border-b border-blue-100 flex-shrink-0"
+              class="bg-primary-50 px-4 py-2 text-[10px] text-primary-dark flex items-center justify-between border-b border-primary-100 flex-shrink-0"
             >
               <button
                 @click="openInNewTab(previewTarget.fileUrl)"
-                class="font-bold underline hover:text-blue-900"
+                class="font-bold underline hover:text-primary-900"
               >
                 Open in New Tab ↗
               </button>
@@ -514,7 +514,7 @@
               <div class="flex gap-3 mt-2">
                 <button
                   @click="openInNewTab(previewTarget.fileUrl)"
-                  class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition"
+                  class="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-xs font-semibold rounded-xl transition"
                 >
                   Open in New Tab ↗
                 </button>
@@ -598,14 +598,14 @@
     >
       <div class="bg-white rounded-3xl w-full max-w-md overflow-hidden border border-gray-100 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-700 to-blue-600 px-6 py-6 text-white text-center relative">
+        <div class="bg-gradient-to-r from-primary-700 to-primary-600 px-6 py-6 text-white text-center relative">
           <div class="h-12 w-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3">
             <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
           <h3 class="font-bold text-lg">Student Information</h3>
-          <p class="text-xs text-blue-100 mt-1">Please fill in your details to unlock and access study materials.</p>
+          <p class="text-xs text-primary-100 mt-1">Please fill in your details to unlock and access study materials.</p>
           <button @click="showStudentModal = false" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -631,7 +631,7 @@
               type="text"
               required
               placeholder="Enter your full name"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition disabled:opacity-60"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition disabled:opacity-60"
               :disabled="submittingStudentInfo"
             />
           </div>
@@ -645,7 +645,7 @@
               id="std-class"
               v-model="studentForm.standard"
               required
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white disabled:opacity-60"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition bg-white disabled:opacity-60"
               :disabled="submittingStudentInfo"
             >
               <option value="" disabled>Select your class</option>
@@ -667,7 +667,7 @@
               type="text"
               required
               placeholder="Enter your school/college name"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition disabled:opacity-60"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition disabled:opacity-60"
               :disabled="submittingStudentInfo"
             />
           </div>
@@ -684,7 +684,7 @@
               pattern="[6-9][0-9]{9}"
               required
               placeholder="Enter 10-digit mobile number"
-              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition disabled:opacity-60"
+              class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition disabled:opacity-60"
               :disabled="submittingStudentInfo"
             />
           </div>
@@ -693,7 +693,7 @@
           <button
             type="submit"
             :disabled="submittingStudentInfo"
-            class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold rounded-xl transition text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200 mt-2 cursor-pointer"
+            class="w-full py-3 bg-primary hover:bg-primary-dark disabled:opacity-60 text-white font-bold rounded-xl transition text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary-200 mt-2 cursor-pointer"
           >
             <svg v-if="submittingStudentInfo" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

@@ -56,7 +56,7 @@
             </div>
 
             <!-- Title (Matching "Register Now For Enquiry") -->
-            <h3 class="text-xl sm:text-2xl font-extrabold text-[#0d3b66] tracking-tight">
+            <h3 class="text-xl sm:text-2xl font-extrabold text-primary-dark tracking-tight">
               Register Now For Enquiry
             </h3>
             <p class="text-xs text-gray-500 mt-0.5">
@@ -81,7 +81,7 @@
               </p>
               <button
                 @click="closeModal"
-                class="w-full bg-[#0d3b66] hover:bg-[#092947] text-white font-bold py-2.5 px-4 rounded-full text-sm transition-all shadow-md active:scale-95 cursor-pointer"
+                class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2.5 px-4 rounded-full text-sm transition-all shadow-md active:scale-95 cursor-pointer"
               >
                 Close
               </button>
@@ -90,11 +90,11 @@
             <!-- Form Container with Inner Styled Graphic Background (matching reference screenshot) -->
             <div
               v-else
-              class="relative rounded-2xl overflow-hidden p-4 sm:p-5 text-white shadow-inner bg-gradient-to-b from-[#0b1c2d] via-[#102d4a] to-[#081827] border border-blue-900/40"
+              class="relative rounded-2xl overflow-hidden p-4 sm:p-5 text-white shadow-inner bg-gradient-to-b from-primary-950 via-primary-900 to-primary-950 border border-primary-900/40"
             >
               <!-- Abstract Glow Elements in Background -->
-              <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
-              <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-light/20 rounded-full blur-2xl pointer-events-none"></div>
 
               <!-- Error Alert -->
               <div
@@ -113,7 +113,7 @@
                     required
                     placeholder="Name"
                     :disabled="loading"
-                    class="w-full px-4 py-2.5 rounded-full bg-white text-gray-800 placeholder-gray-400 text-sm font-medium outline-none border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 transition-all shadow-sm"
+                    class="w-full px-4 py-2.5 rounded-full bg-white text-gray-800 placeholder-gray-400 text-sm font-medium outline-none border border-transparent focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30 transition-all shadow-sm"
                   />
                 </div>
 
@@ -124,7 +124,7 @@
                       v-model="form.branch"
                       required
                       :disabled="loading"
-                      class="w-full appearance-none px-4 py-2.5 rounded-full bg-white text-gray-800 text-sm font-medium outline-none border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 transition-all shadow-sm pr-9 cursor-pointer"
+                      class="w-full appearance-none px-4 py-2.5 rounded-full bg-white text-gray-800 text-sm font-medium outline-none border border-transparent focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30 transition-all shadow-sm pr-9 cursor-pointer"
                       :class="{ 'text-gray-400': !form.branch }"
                     >
                       <option value="" disabled selected>Select our Nearest Branch</option>
@@ -151,7 +151,7 @@
                     placeholder="Mobile"
                     title="Please enter a valid 10-digit mobile number"
                     :disabled="loading"
-                    class="w-full px-4 py-2.5 rounded-full bg-white text-gray-800 placeholder-gray-400 text-sm font-medium outline-none border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 transition-all shadow-sm"
+                    class="w-full px-4 py-2.5 rounded-full bg-white text-gray-800 placeholder-gray-400 text-sm font-medium outline-none border border-transparent focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30 transition-all shadow-sm"
                   />
                 </div>
 
@@ -162,7 +162,7 @@
                       v-model="form.currentClass"
                       required
                       :disabled="loading"
-                      class="w-full appearance-none px-4 py-2.5 rounded-full bg-white text-gray-800 text-sm font-medium outline-none border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 transition-all shadow-sm pr-9 cursor-pointer"
+                      class="w-full appearance-none px-4 py-2.5 rounded-full bg-white text-gray-800 text-sm font-medium outline-none border border-transparent focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30 transition-all shadow-sm pr-9 cursor-pointer"
                       :class="{ 'text-gray-400': !form.currentClass }"
                     >
                       <option value="" disabled selected>Select Standard</option>
@@ -189,7 +189,7 @@
                     rows="2"
                     placeholder="Comment Or Message"
                     :disabled="loading"
-                    class="w-full px-4 py-2 rounded-2xl bg-white text-gray-800 placeholder-gray-400 text-sm font-medium outline-none border border-transparent focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 transition-all resize-none shadow-sm"
+                    class="w-full px-4 py-2 rounded-2xl bg-white text-gray-800 placeholder-gray-400 text-sm font-medium outline-none border border-transparent focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30 transition-all resize-none shadow-sm"
                   ></textarea>
                 </div>
 
@@ -198,11 +198,11 @@
                   <button
                     type="submit"
                     :disabled="loading"
-                    class="w-full py-3 px-5 rounded-full bg-white hover:bg-gray-100 text-[#0d3b66] font-extrabold text-sm sm:text-base tracking-wide transition-all shadow-lg hover:shadow-xl active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer border border-white/60"
+                    class="w-full py-3 px-5 rounded-full bg-white hover:bg-gray-100 text-primary-dark font-extrabold text-sm sm:text-base tracking-wide transition-all shadow-lg hover:shadow-xl active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer border border-white/60"
                   >
                     <svg
                       v-if="loading"
-                      class="h-4 w-4 animate-spin text-[#0d3b66]"
+                      class="h-4 w-4 animate-spin text-primary-dark"
                       fill="none"
                       viewBox="0 0 24 24"
                     >

@@ -1,16 +1,16 @@
 <template>
-  <div class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
+  <div class="py-16 bg-gradient-to-br from-primary-50 to-primary-50">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-700 to-indigo-700 p-8 text-center text-white">
+        <div class="bg-gradient-to-r from-primary-700 to-primary-700 p-8 text-center text-white">
           <div class="h-14 w-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
             <svg class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
             </svg>
           </div>
           <h1 class="text-2xl font-bold mb-1">MSAT Registration</h1>
-          <p class="text-blue-200 text-sm">Manch Scholarship Admission Test</p>
+          <p class="text-primary-200 text-sm">Manch Scholarship Admission Test</p>
           <div class="mt-4 inline-block bg-white/10 px-4 py-1.5 rounded-full text-xs font-medium">
             🏆 Win up to 100% scholarship
           </div>
@@ -27,15 +27,15 @@
             <h2 class="text-xl font-bold text-gray-800 mb-2">Registration Successful!</h2>
             <p class="text-gray-500 mb-2">Thank you, <strong>{{ submittedName }}</strong>!</p>
             <p class="text-gray-400 text-sm">Our team will reach out with exam details within 24–48 hours.</p>
-            <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-700 text-left">
+            <div class="mt-6 p-4 bg-primary-50 rounded-xl border border-primary-100 text-sm text-primary-dark text-left">
               <p class="font-medium mb-1">📌 What's Next?</p>
-              <ul class="space-y-1 text-blue-600 text-xs">
+              <ul class="space-y-1 text-primary-dark text-xs">
                 <li>• You'll receive exam date & venue details via phone/email</li>
                 <li>• Bring original mark sheets for verification</li>
                 <li>• No exam fee required</li>
               </ul>
             </div>
-            <button @click="resetForm" class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium">
+            <button @click="resetForm" class="mt-6 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition text-sm font-medium">
               Register Another Student
             </button>
           </div>
@@ -58,7 +58,7 @@
                   placeholder="As per school records"
                   required
                   :disabled="loading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60"
                 />
               </div>
 
@@ -73,7 +73,7 @@
                   placeholder="Parent/student number"
                   required
                   :disabled="loading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60"
                 />
               </div>
 
@@ -86,7 +86,7 @@
                   type="email"
                   placeholder="Optional"
                   :disabled="loading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60"
                 />
               </div>
 
@@ -98,7 +98,7 @@
                   v-model="form.currentClass"
                   required
                   :disabled="loading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60"
                 >
                   <option value="" disabled>Select class</option>
                   <option v-for="cls in classes" :key="cls" :value="cls">{{ cls }}</option>
@@ -115,7 +115,7 @@
                   placeholder="Current school name"
                   required
                   :disabled="loading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60"
                 />
               </div>
 
@@ -128,7 +128,7 @@
                   type="date"
                   :min="minDate"
                   :disabled="loading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60"
                 />
               </div>
             </div>
@@ -137,7 +137,7 @@
               id="msat-submit-btn"
               type="submit"
               :disabled="loading"
-              class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold rounded-xl transition-all text-base flex items-center justify-center gap-2 shadow-lg shadow-blue-200"
+              class="w-full py-3 bg-primary hover:bg-primary-dark disabled:opacity-60 text-white font-bold rounded-xl transition-all text-base flex items-center justify-center gap-2 shadow-lg shadow-primary-200"
             >
               <svg v-if="loading" class="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

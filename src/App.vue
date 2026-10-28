@@ -5,7 +5,7 @@
       <MainNavbar class="print:hidden" />
     </template>
 
-    <main :class="isAdminRoute ? '' : 'flex-grow pt-16 print:pt-0 print:m-0 print:p-0'">
+    <main :class="isAdminRoute ? '' : 'flex-grow pt-20 print:pt-0 print:m-0 print:p-0'">
       <router-view />
     </main>
 

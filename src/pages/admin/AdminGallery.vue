@@ -21,7 +21,7 @@
                 <select
                   id="gallery-event"
                   v-model="form.event"
-                  class="flex-1 px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  class="flex-1 px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
                 >
                   <option value="" disabled>Select or type below</option>
                   <option v-for="ev in eventOptions" :key="ev" :value="ev">
@@ -35,7 +35,7 @@
                 v-model="form.customEvent"
                 type="text"
                 placeholder="e.g., Sports Day 2025"
-                class="mt-2 w-full px-4 py-2.5 border border-blue-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="mt-2 w-full px-4 py-2.5 border border-primary-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>
 
@@ -52,7 +52,7 @@
                 v-model="form.title"
                 type="text"
                 placeholder="e.g., Annual Function 2024"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
               />
             </div>
 
@@ -68,8 +68,8 @@
                 :class="[
                   'border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors',
                   form.file
-                    ? 'border-blue-400 bg-blue-50'
-                    : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50',
+                    ? 'border-primary-400 bg-primary-50'
+                    : 'border-gray-300 hover:border-primary-400 hover:bg-primary-50',
                 ]"
               >
                 <input
@@ -95,7 +95,7 @@
                   </svg>
                   <p class="text-sm text-gray-500">
                     Drag & drop or
-                    <span class="text-blue-600 font-medium">browse</span>
+                    <span class="text-primary-dark font-medium">browse</span>
                   </p>
                   <p class="text-xs text-gray-400 mt-1">
                     JPG, PNG, WebP, GIF • Max 40MB
@@ -107,7 +107,7 @@
                     alt="Preview"
                     class="h-32 w-full object-cover rounded-lg"
                   />
-                  <p class="text-xs text-blue-600 mt-2">
+                  <p class="text-xs text-primary-dark mt-2">
                     {{ form.file?.name }}
                   </p>
                 </div>
@@ -125,7 +125,7 @@
               </div>
               <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                  class="h-full bg-blue-600 rounded-full transition-all"
+                  class="h-full bg-primary rounded-full transition-all"
                   :style="{ width: uploadProgress + '%' }"
                 ></div>
               </div>
@@ -136,7 +136,7 @@
               id="gallery-upload-btn"
               type="submit"
               :disabled="uploading || !form.file"
-              class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
+              class="w-full py-3 bg-primary hover:bg-primary-dark disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
             >
               <svg
                 v-if="uploading"
@@ -176,7 +176,7 @@
             </h2>
             <button
               @click="fetchImages"
-              class="text-xs text-blue-600 hover:underline"
+              class="text-xs text-primary-dark hover:underline"
             >
               Refresh
             </button>
@@ -237,7 +237,7 @@
                   <!-- Edit button -->
                   <button
                     @click.stop="startEdit(image)"
-                    class="p-1.5 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors"
+                    class="p-1.5 bg-primary hover:bg-primary-dark rounded-lg transition-colors"
                     title="Edit caption & event"
                   >
                     <svg
@@ -307,7 +307,7 @@
           >
           <select
             v-model="editForm.event"
-            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
           >
             <option value="">None</option>
             <option v-for="ev in eventOptions" :key="ev" :value="ev">
@@ -320,7 +320,7 @@
             v-model="editForm.customEvent"
             type="text"
             placeholder="e.g., Sports Day 2025"
-            class="mt-2 w-full px-4 py-2.5 border border-blue-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            class="mt-2 w-full px-4 py-2.5 border border-primary-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
           />
         </div>
 
@@ -334,7 +334,7 @@
             v-model="editForm.title"
             type="text"
             placeholder="e.g., Stage performance"
-            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
           />
         </div>
 
@@ -348,7 +348,7 @@
           <button
             @click="handleEditSave"
             :disabled="saving"
-            class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white rounded-xl text-sm font-medium transition flex items-center justify-center gap-2"
+            class="flex-1 py-2 bg-primary hover:bg-primary-dark disabled:opacity-60 text-white rounded-xl text-sm font-medium transition flex items-center justify-center gap-2"
           >
             <svg
               v-if="saving"

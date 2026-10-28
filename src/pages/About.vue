@@ -2,7 +2,7 @@
   <div class="bg-gray-50/50 min-h-screen">
     <!-- Premium Header Hero Section -->
     <div
-      class="relative bg-gradient-to-br from-primary-dark via-primary to-blue-800 py-20 text-white overflow-hidden"
+      class="relative bg-gradient-to-br from-primary-dark via-primary to-primary-800 py-20 text-white overflow-hidden"
     >
       <!-- Background Decorative Blur Rings -->
       <div
@@ -26,7 +26,7 @@
           Creating Innovators of Tomorrow
         </h1>
         <p
-          class="text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto font-light leading-relaxed"
+          class="text-lg sm:text-xl text-primary-100 max-w-3xl mx-auto font-light leading-relaxed"
         >
           Nurturing curious minds with the knowledge, skills, and values to
           excel in competitive exams and shape a brighter future.
@@ -45,7 +45,7 @@
         >
           <div>
             <div
-              class="inline-flex items-center justify-center p-3.5 bg-blue-50 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300"
+              class="inline-flex items-center justify-center p-3.5 bg-primary-50 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300"
             >
               <!-- Target Icon -->
               <svg
@@ -146,11 +146,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Value 1: Student Centric Approach -->
           <div
-            class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300 flex flex-col justify-between group"
+            class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-primary-100 transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
               <div
-                class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-primary mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-300"
+                class="w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center text-primary mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-300"
               >
                 <svg
                   class="w-6 h-6"

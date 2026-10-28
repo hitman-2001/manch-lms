@@ -1,16 +1,16 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 flex items-center justify-center px-4">
+  <div class="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 flex items-center justify-center px-4">
     <!-- Background decoration -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
-      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500 rounded-full opacity-10 blur-3xl"></div>
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary rounded-full opacity-10 blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-primary rounded-full opacity-10 blur-3xl"></div>
     </div>
 
     <div class="relative w-full max-w-md">
       <!-- Card -->
       <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-700 to-blue-600 p-8 text-center">
+        <div class="bg-gradient-to-r from-primary-700 to-primary-600 p-8 text-center">
           <div class="h-16 w-16 rounded-2xl bg-white/20 flex items-center justify-center mx-auto mb-4">
             <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -18,7 +18,7 @@
             </svg>
           </div>
           <h1 class="text-2xl font-bold text-white">Admin Login</h1>
-          <p class="text-blue-200 text-sm mt-1">Manch Science Classes</p>
+          <p class="text-primary-200 text-sm mt-1">Manch Science Classes</p>
         </div>
 
         <!-- Form -->
@@ -48,7 +48,7 @@
                   placeholder="admin@manchscience.com"
                   required
                   :disabled="loading"
-                  class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60 disabled:bg-gray-50"
+                  class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60 disabled:bg-gray-50"
                 />
               </div>
             </div>
@@ -69,7 +69,7 @@
                   placeholder="••••••••"
                   required
                   :disabled="loading"
-                  class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:opacity-60 disabled:bg-gray-50"
+                  class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition disabled:opacity-60 disabled:bg-gray-50"
                 />
                 <button
                   type="button"
@@ -91,7 +91,7 @@
               id="admin-login-btn"
               type="submit"
               :disabled="loading"
-              class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200"
+              class="w-full py-3 px-4 bg-primary hover:bg-primary-dark disabled:bg-primary-400 text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary-200"
             >
               <svg v-if="loading" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

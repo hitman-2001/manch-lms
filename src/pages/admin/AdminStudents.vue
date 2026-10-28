@@ -22,7 +22,7 @@
           </button>
           <button
             @click="fetchStudents"
-            class="px-4 py-2 text-xs font-medium text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+            class="px-4 py-2 text-xs font-medium text-primary-dark hover:text-primary-dark bg-primary-50 hover:bg-primary-100 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <svg class="h-3.5 w-3.5 animate-spin-hover" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -44,14 +44,14 @@
             type="text"
             v-model="searchQuery"
             placeholder="Search by student name, phone, school, or class..."
-            class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
           />
         </div>
         <!-- Month Filter Dropdown -->
         <div v-if="availableMonths.length > 1" class="w-full sm:w-48 flex-shrink-0">
           <select
             v-model="selectedMonth"
-            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all bg-white"
+            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-primary-500 transition-all bg-white"
           >
             <option value="All Months">All Months</option>
             <option v-for="month in availableMonths.slice(1)" :key="month" :value="month">
@@ -64,7 +64,7 @@
       <!-- Content Area -->
       <!-- Loading State -->
       <div v-if="loading" class="py-12 flex flex-col items-center justify-center">
-        <svg class="animate-spin h-8 w-8 text-blue-600 mb-3" fill="none" viewBox="0 0 24 24">
+        <svg class="animate-spin h-8 w-8 text-primary-dark mb-3" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
         </svg>
@@ -106,7 +106,7 @@
               <!-- Student Name -->
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <div class="h-8 w-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">
+                  <div class="h-8 w-8 rounded-full bg-primary-100 text-primary-dark flex items-center justify-center font-bold text-xs">
                     {{ getInitial(student.name) }}
                   </div>
                   <div class="font-semibold text-gray-800 text-sm">{{ student.name }}</div>
@@ -115,7 +115,7 @@
 
               <!-- Class -->
               <td class="px-6 py-4">
-                <span class="inline-flex items-center px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md text-xs font-semibold border border-blue-100">
+                <span class="inline-flex items-center px-2.5 py-0.5 bg-primary-50 text-primary-dark rounded-md text-xs font-semibold border border-primary-100">
                   Class {{ student.standard || 'N/A' }}
                 </span>
               </td>
@@ -131,7 +131,7 @@
               <td class="px-6 py-4">
                 <a
                   :href="'tel:' + student.phone"
-                  class="text-sm text-gray-600 hover:text-blue-600 font-medium flex items-center gap-1.5 w-max"
+                  class="text-sm text-gray-600 hover:text-primary-dark font-medium flex items-center gap-1.5 w-max"
                 >
                   <svg class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

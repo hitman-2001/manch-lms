@@ -45,7 +45,7 @@
             (A Division of Pencilbox Education LLP)
           </p>
 
-          <div class="mt-4 inline-block px-5 py-1.5 bg-blue-50 border border-blue-200/80 rounded-full text-xs font-bold text-blue-900 tracking-wider uppercase print:border print:border-gray-700 print:bg-gray-100">
+          <div class="mt-4 inline-block px-5 py-1.5 bg-primary-50 border border-primary-200/80 rounded-full text-xs font-bold text-primary-900 tracking-wider uppercase print:border print:border-gray-700 print:bg-gray-100">
             Terms, Conditions & Fees Refund Policy
           </div>
 
@@ -63,7 +63,7 @@
           <!-- 1. Necessary Deductions -->
           <div class="page-break-avoid">
             <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2.5 flex items-center gap-2 print:text-sm">
-              <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">1</span>
+              <span class="w-6 h-6 rounded-lg bg-primary-100 text-primary-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">1</span>
               Necessary Deductions:
             </h2>
             <div class="pl-2 sm:pl-8">
@@ -76,7 +76,7 @@
           <!-- 2. Refund Schedule Table -->
           <div class="page-break-avoid">
             <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2.5 flex items-center gap-2 print:text-sm">
-              <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">2</span>
+              <span class="w-6 h-6 rounded-lg bg-primary-100 text-primary-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">2</span>
               Refund Schedule (Calculated after necessary deductions):
             </h2>
             <div class="pl-2 sm:pl-8 space-y-2">
@@ -90,7 +90,7 @@
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-gray-200 print:divide-gray-400">
-                    <tr class="hover:bg-blue-50/40">
+                    <tr class="hover:bg-primary-50/40">
                       <td class="px-4 py-3 font-semibold text-gray-900 border-r border-gray-200 print:border-gray-400">
                         Within 15 days of taking admission
                       </td>
@@ -101,18 +101,18 @@
                         Calculated on remaining fees after deduction
                       </td>
                     </tr>
-                    <tr class="hover:bg-blue-50/40">
+                    <tr class="hover:bg-primary-50/40">
                       <td class="px-4 py-3 font-semibold text-gray-900 border-r border-gray-200 print:border-gray-400">
                         Within 30 days of taking admission
                       </td>
-                      <td class="px-4 py-3 font-bold text-blue-700 text-center text-sm sm:text-base print:text-xs border-r border-gray-200 print:border-gray-400">
+                      <td class="px-4 py-3 font-bold text-primary-dark text-center text-sm sm:text-base print:text-xs border-r border-gray-200 print:border-gray-400">
                         70% Refund
                       </td>
                       <td class="px-4 py-3 text-gray-600 text-xs">
                         Calculated on remaining fees after deduction
                       </td>
                     </tr>
-                    <tr class="hover:bg-blue-50/40">
+                    <tr class="hover:bg-primary-50/40">
                       <td class="px-4 py-3 font-semibold text-gray-900 border-r border-gray-200 print:border-gray-400">
                         Within 60 days of taking admission
                       </td>
@@ -143,7 +143,7 @@
           <!-- 3. Procedure to Request a Refund -->
           <div class="page-break-avoid">
             <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2.5 flex items-center gap-2 print:text-sm">
-              <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">3</span>
+              <span class="w-6 h-6 rounded-lg bg-primary-100 text-primary-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">3</span>
               Procedure to Request a Refund:
             </h2>
             <div class="pl-2 sm:pl-8">
@@ -164,7 +164,7 @@
           <!-- 4. Important Notes & Disbursement -->
           <div class="page-break-avoid">
             <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2.5 flex items-center gap-2 print:text-sm">
-              <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">4</span>
+              <span class="w-6 h-6 rounded-lg bg-primary-100 text-primary-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">4</span>
               Processing Timeline & Disbursement Terms:
             </h2>
             <div class="pl-2 sm:pl-8">
@@ -182,7 +182,7 @@
           <!-- 5. Legal Governance & Amendment Rights -->
           <div class="page-break-avoid">
             <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2.5 flex items-center gap-2 print:text-sm">
-              <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">5</span>
+              <span class="w-6 h-6 rounded-lg bg-primary-100 text-primary-800 flex items-center justify-center text-xs font-bold print:border print:border-gray-400">5</span>
               Institutional Governance:
             </h2>
             <div class="pl-2 sm:pl-8">

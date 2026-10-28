@@ -184,8 +184,8 @@
           :key="link.path"
           :to="link.path"
           @click="closeMobileMenu"
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
-          active-class="text-primary bg-blue-50 font-bold"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-primary-50 rounded-md"
+          active-class="text-primary bg-primary-50 font-bold"
         >
           {{ link.name }}
         </router-link>
@@ -202,7 +202,7 @@
             target="_blank"
             rel="noopener noreferrer"
             @click="closeMobileMenu"
-            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-primary-50 rounded-md"
           >
             Online Test Portal
           </a>
@@ -210,7 +210,7 @@
             href="/manch-classes.apk"
             download
             @click="closeMobileMenu"
-            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-primary-50 rounded-md"
           >
             Download Android App (APK)
           </a>
@@ -228,7 +228,7 @@
             target="_blank"
             rel="noopener noreferrer"
             @click="closeMobileMenu"
-            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-primary-50 rounded-md"
           >
             Parent Login
           </a>
@@ -237,7 +237,7 @@
             target="_blank"
             rel="noopener noreferrer"
             @click="closeMobileMenu"
-            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-blue-50 rounded-md"
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-primary-50 rounded-md"
           >
             Manch Login (Staff)
           </a>

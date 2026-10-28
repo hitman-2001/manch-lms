@@ -15,7 +15,7 @@
       <!-- Logo & Brand Header -->
       <router-link
         to="/"
-        class="px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-blue-700 to-blue-600 block hover:opacity-95 transition-opacity"
+        class="px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-primary-700 to-primary-600 block hover:opacity-95 transition-opacity"
       >
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
@@ -27,7 +27,7 @@
             </div>
             <div class="min-w-0">
               <p class="text-white font-bold text-sm leading-tight truncate">Manch Science</p>
-              <p class="text-blue-200 text-xs">Admin Panel</p>
+              <p class="text-primary-200 text-xs">Admin Panel</p>
             </div>
           </div>
           <!-- Close button on mobile -->
@@ -52,7 +52,7 @@
           class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all group"
           :class="[
             $route.path === item.to
-              ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-100'
+              ? 'bg-primary-50 text-primary-dark font-semibold border border-primary-100'
               : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
           ]"
         >
@@ -64,7 +64,7 @@
       <!-- Bottom User Profile & Logout -->
       <div class="px-3 py-3 border-t border-gray-100 bg-gray-50/50">
         <div class="flex items-center gap-2.5 mb-2.5 p-2 rounded-xl bg-white border border-gray-100 shadow-xs">
-          <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs flex-shrink-0">
+          <div class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-dark font-bold text-xs flex-shrink-0">
             {{ adminInitial }}
           </div>
           <div class="flex-1 min-w-0">
@@ -110,7 +110,7 @@
           <router-link
             to="/"
             target="_blank"
-            class="text-xs font-medium text-gray-600 hover:text-blue-600 bg-gray-50 hover:bg-blue-50 px-3 py-1.5 rounded-lg border border-gray-200 flex items-center gap-1.5 transition-colors"
+            class="text-xs font-medium text-gray-600 hover:text-primary-dark bg-gray-50 hover:bg-primary-50 px-3 py-1.5 rounded-lg border border-gray-200 flex items-center gap-1.5 transition-colors"
           >
             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

@@ -116,7 +116,7 @@
               <button
                 @click="triggerImageUpload(member)"
                 :disabled="member._uploading"
-                class="p-2 bg-blue-500 hover:bg-blue-600 disabled:opacity-60 rounded-xl transition-colors"
+                class="p-2 bg-primary hover:bg-primary-dark disabled:opacity-60 rounded-xl transition-colors"
                 title="Change photo"
               >
                 <svg
@@ -183,7 +183,7 @@
               class="absolute bottom-0 left-0 right-0 h-1 bg-gray-200"
             >
               <div
-                class="h-full bg-blue-500 transition-all"
+                class="h-full bg-primary transition-all"
                 :style="{ width: member._uploadProgress + '%' }"
               ></div>
             </div>

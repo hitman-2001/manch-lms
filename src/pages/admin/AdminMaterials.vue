@@ -22,7 +22,7 @@
                 type="text"
                 placeholder="e.g., Chapter 5 - Laws of Motion"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
               />
             </div>
 
@@ -37,7 +37,7 @@
                 id="material-standard"
                 v-model="form.standard"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               >
                 <option value="" disabled>Select standard</option>
                 <option v-for="std in standards" :key="std" :value="std">
@@ -59,7 +59,7 @@
                 type="text"
                 placeholder="e.g., Physics, Chemistry, Biology"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
               />
             </div>
 
@@ -75,8 +75,8 @@
                 :class="[
                   'border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors',
                   form.file
-                    ? 'border-blue-400 bg-blue-50'
-                    : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50',
+                    ? 'border-primary-400 bg-primary-50'
+                    : 'border-gray-300 hover:border-primary-400 hover:bg-primary-50',
                 ]"
               >
                 <input
@@ -101,9 +101,9 @@
                 </svg>
                 <p v-if="!form.file" class="text-sm text-gray-500">
                   Drag & drop or
-                  <span class="text-blue-600 font-medium">browse</span>
+                  <span class="text-primary-dark font-medium">browse</span>
                 </p>
-                <p v-else class="text-sm text-blue-600 font-medium">
+                <p v-else class="text-sm text-primary-dark font-medium">
                   {{ form.file.name }}
                 </p>
                 <p class="text-xs text-gray-400 mt-1">
@@ -122,7 +122,7 @@
               </div>
               <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                  class="h-full bg-blue-600 rounded-full transition-all"
+                  class="h-full bg-primary rounded-full transition-all"
                   :style="{ width: uploadProgress + '%' }"
                 ></div>
               </div>
@@ -138,7 +138,7 @@
                 !form.standard ||
                 !form.subject
               "
-              class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
+              class="w-full py-3 bg-primary hover:bg-primary-dark disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
             >
               <svg
                 v-if="uploading"
@@ -178,7 +178,7 @@
             </h2>
             <button
               @click="fetchMaterials"
-              class="text-xs text-blue-600 hover:underline"
+              class="text-xs text-primary-dark hover:underline"
             >
               Refresh
             </button>
@@ -226,7 +226,7 @@
                   'h-9 w-9 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold uppercase',
                   mat.type === 'pdf'
                     ? 'bg-red-100 text-red-600'
-                    : 'bg-blue-100 text-blue-600',
+                    : 'bg-primary-100 text-primary-dark',
                 ]"
               >
                 {{ mat.type === "pdf" ? "PDF" : "IMG" }}
@@ -248,7 +248,7 @@
                   :href="getPreviewUrl(mat)"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-1.5 text-gray-400 hover:text-blue-600 transition"
+                  class="p-1.5 text-gray-400 hover:text-primary-dark transition"
                   title="Preview"
                 >
                   <svg

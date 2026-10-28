@@ -20,7 +20,7 @@
               <select
                 id="res-year"
                 v-model="form.year"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
                 required
               >
                 <option value="" disabled>Select Year</option>
@@ -41,7 +41,7 @@
               <select
                 id="res-cat"
                 v-model="form.category"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
                 required
               >
                 <option value="" disabled>Select Category</option>
@@ -66,7 +66,7 @@
                 v-model="form.description"
                 rows="3"
                 placeholder="e.g., 50+ Selections in NEET 2024, 15 Students above 95%"
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               ></textarea>
             </div>
 
@@ -80,8 +80,8 @@
                 :class="[
                   'border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors',
                   form.file
-                    ? 'border-blue-400 bg-blue-50'
-                    : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50',
+                    ? 'border-primary-400 bg-primary-50'
+                    : 'border-gray-300 hover:border-primary-400 hover:bg-primary-50',
                 ]"
               >
                 <input
@@ -131,7 +131,7 @@
               </div>
               <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  class="h-full bg-blue-600 transition-all"
+                  class="h-full bg-primary transition-all"
                   :style="{ width: uploadProgress + '%' }"
                 ></div>
               </div>
@@ -140,7 +140,7 @@
             <button
               type="submit"
               :disabled="uploading || !form.file"
-              class="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
+              class="w-full py-3 bg-primary hover:bg-primary-dark disabled:bg-gray-300 text-white font-semibold rounded-xl transition-all text-sm flex items-center justify-center gap-2"
             >
               <svg
                 v-if="uploading"
@@ -177,7 +177,7 @@
             </h2>
             <button
               @click="fetchResults"
-              class="text-xs text-blue-600 hover:underline"
+              class="text-xs text-primary-dark hover:underline"
             >
               Refresh
             </button>
@@ -202,7 +202,7 @@
             <div
               v-for="res in results"
               :key="res.id"
-              class="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:border-blue-100 transition-colors group"
+              class="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:border-primary-100 transition-colors group"
             >
               <div
                 class="h-16 w-16 rounded-xl bg-gray-50 overflow-hidden flex-shrink-0"
@@ -212,7 +212,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-1">
                   <span
-                    class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-bold uppercase"
+                    class="px-2 py-0.5 bg-primary-100 text-primary-dark rounded text-[10px] font-bold uppercase"
                     >{{ res.year }}</span
                   >
                   <span

@@ -18,7 +18,7 @@
                 type="text"
                 placeholder="e.g., Prof. Rajesh Sharma"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>
 
@@ -31,7 +31,7 @@
                 type="text"
                 placeholder="e.g., Physics Expert"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>
 
@@ -44,7 +44,7 @@
                 type="text"
                 placeholder="e.g., M.Tech (IIT Bombay)"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>
 
@@ -57,7 +57,7 @@
                 type="text"
                 placeholder="e.g., 12+ Years Teaching"
                 required
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>
 
@@ -69,7 +69,7 @@
                 v-model="form.bio"
                 rows="3"
                 placeholder="e.g., Expert in Physics, helping students clear NEET with 10+ years of dedicated coaching."
-                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition resize-none"
               ></textarea>
             </div>
 
@@ -80,7 +80,7 @@
                 @click="$refs.facPhotoInput.click()"
                 :class="[
                   'border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-colors relative overflow-hidden h-32 flex flex-col items-center justify-center',
-                  form.photoPreview || form.imageUrl ? 'border-blue-400 bg-blue-50' : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50'
+                  form.photoPreview || form.imageUrl ? 'border-primary-400 bg-primary-50' : 'border-gray-300 hover:border-primary-400 hover:bg-primary-50'
                 ]"
               >
                 <input
@@ -94,7 +94,7 @@
                 <template v-if="form.photoPreview || form.imageUrl">
                   <img :src="getFacultyImageUrl(form.photoPreview || form.imageUrl)" class="absolute inset-0 w-full h-full object-cover opacity-20" />
                   <div class="relative z-10">
-                    <p class="text-xs text-blue-600 font-medium">Photo Selected</p>
+                    <p class="text-xs text-primary-dark font-medium">Photo Selected</p>
                     <button type="button" @click.stop="clearPhoto" class="text-[10px] text-red-500 hover:underline mt-1">Remove</button>
                   </div>
                 </template>
@@ -111,7 +111,7 @@
             <!-- Progress Bar -->
             <div v-if="uploadProgress > 0 && uploadProgress < 100">
               <div class="h-1 bg-gray-100 rounded-full overflow-hidden mt-2">
-                <div class="h-full bg-blue-500 transition-all" :style="{ width: uploadProgress + '%' }"></div>
+                <div class="h-full bg-primary transition-all" :style="{ width: uploadProgress + '%' }"></div>
               </div>
             </div>
 
@@ -127,7 +127,7 @@
               <button
                 type="submit"
                 :disabled="saving"
-                class="flex-[2] py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2"
+                class="flex-[2] py-3 bg-primary hover:bg-primary-dark disabled:bg-gray-300 text-white font-semibold rounded-xl text-sm transition flex items-center justify-center gap-2"
               >
                 <svg v-if="saving" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -145,7 +145,7 @@
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-base font-semibold text-gray-800">Faculty Members <span class="text-gray-400 text-sm font-normal">({{ faculty.length }})</span></h2>
-            <button @click="fetchFaculty" class="text-xs text-blue-600 hover:underline">Refresh</button>
+            <button @click="fetchFaculty" class="text-xs text-primary-dark hover:underline">Refresh</button>
           </div>
 
           <!-- Loading -->
@@ -168,7 +168,7 @@
             <div
               v-for="member in faculty"
               :key="member.id"
-              class="flex items-center gap-4 p-4 rounded-2xl border border-gray-50 hover:border-blue-100 hover:bg-blue-50/10 transition group"
+              class="flex items-center gap-4 p-4 rounded-2xl border border-gray-50 hover:border-primary-100 hover:bg-primary-50/10 transition group"
             >
               <!-- Photo -->
               <div class="h-16 w-16 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0">
@@ -192,7 +192,7 @@
 
               <!-- Actions -->
               <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button @click="editMember(member)" class="p-2 text-gray-400 hover:text-blue-600 hover:bg-white rounded-lg transition shadow-sm" title="Edit">
+                <button @click="editMember(member)" class="p-2 text-gray-400 hover:text-primary-dark hover:bg-white rounded-lg transition shadow-sm" title="Edit">
                   <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>

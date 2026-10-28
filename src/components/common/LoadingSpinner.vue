@@ -43,10 +43,10 @@ export default {
     },
     colorClass() {
       return {
-        primary: 'border-blue-600',
+        primary: 'border-primary-600',
         white: 'border-white',
         gray: 'border-gray-400'
-      }[this.color] || 'border-blue-600'
+      }[this.color] || 'border-primary-600'
     },
     labelColorClass() {
       return this.color === 'white' ? 'text-white' : 'text-gray-600'

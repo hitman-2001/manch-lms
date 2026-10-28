@@ -66,7 +66,7 @@ export default {
     tagColorClass() {
       const lowerTag = this.tag.toLowerCase();
       if (lowerTag.includes('foundation')) {
-        return 'bg-blue-50 text-blue-600 border border-blue-100';
+        return 'bg-primary-50 text-primary-dark border border-primary-100';
       } else if (lowerTag.includes('board')) {
         return 'bg-emerald-50 text-emerald-600 border border-emerald-100';
       } else if (lowerTag.includes('entrance') || lowerTag.includes('competitive') || lowerTag.includes('neet') || lowerTag.includes('jee')) {

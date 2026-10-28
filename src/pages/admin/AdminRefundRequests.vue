@@ -48,7 +48,7 @@
             class="px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer whitespace-nowrap"
             :class="[
               selectedStatus === status.key
-                ? 'bg-blue-600 text-white shadow-xs font-semibold'
+                ? 'bg-primary text-white shadow-xs font-semibold'
                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
             ]"
           >
@@ -74,14 +74,14 @@
               type="text"
               v-model="searchQuery"
               placeholder="Search by student, ID, phone, email, course..."
-              class="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:bg-white focus:border-blue-500 transition-all"
+              class="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:bg-white focus:border-primary-500 transition-all"
             />
           </div>
 
           <div v-if="availableMonths.length > 1" class="w-full sm:w-44 flex-shrink-0">
             <select
               v-model="selectedMonth"
-              class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:bg-white focus:border-blue-500 transition-all bg-white"
+              class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:bg-white focus:border-primary-500 transition-all bg-white"
             >
               <option value="All Months">All Months</option>
               <option v-for="month in availableMonths.slice(1)" :key="month" :value="month">
@@ -96,7 +96,7 @@
       <div class="bg-white rounded-2xl shadow-xs border border-gray-200/80 overflow-hidden">
         <!-- Loading State -->
         <div v-if="loading" class="py-16 flex flex-col items-center justify-center">
-          <svg class="animate-spin h-7 w-7 text-blue-600 mb-2" fill="none" viewBox="0 0 24 24">
+          <svg class="animate-spin h-7 w-7 text-primary-dark mb-2" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
           </svg>
@@ -164,7 +164,7 @@
               <a
                 v-if="item.phone"
                 :href="'tel:' + item.phone"
-                class="text-xs text-blue-600 font-semibold flex items-center gap-1"
+                class="text-xs text-primary-dark font-semibold flex items-center gap-1"
               >
                 📞 {{ item.phone }}
               </a>
@@ -228,7 +228,7 @@
                   <a
                     v-if="item.phone"
                     :href="'tel:' + item.phone"
-                    class="text-[11px] text-blue-600 hover:underline block mt-0.5"
+                    class="text-[11px] text-primary-dark hover:underline block mt-0.5"
                   >
                     {{ item.phone }}
                   </a>
@@ -241,7 +241,7 @@
                   </div>
                   <button
                     @click="openDetails(item)"
-                    class="text-[10px] font-bold text-gray-400 hover:text-blue-600 mt-0.5 block"
+                    class="text-[10px] font-bold text-gray-400 hover:text-primary-dark mt-0.5 block"
                   >
                     View details
                   </button>
@@ -283,7 +283,7 @@
                   <div class="flex items-center justify-end gap-1">
                     <button
                       @click="openDetails(item)"
-                      class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                      class="p-1.5 text-gray-400 hover:text-primary-dark hover:bg-primary-50 rounded-lg transition-colors cursor-pointer"
                       title="View Full Details"
                     >
                       <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -390,13 +390,13 @@
               </div>
               <div>
                 <span class="text-gray-400 block text-[10px]">Mobile Phone</span>
-                <a :href="'tel:' + selectedRequest.phone" class="font-semibold text-blue-600 hover:underline">
+                <a :href="'tel:' + selectedRequest.phone" class="font-semibold text-primary-dark hover:underline">
                   {{ selectedRequest.phone }}
                 </a>
               </div>
               <div>
                 <span class="text-gray-400 block text-[10px]">Email Address</span>
-                <a :href="'mailto:' + selectedRequest.email" class="font-semibold text-blue-600 hover:underline truncate block">
+                <a :href="'mailto:' + selectedRequest.email" class="font-semibold text-primary-dark hover:underline truncate block">
                   {{ selectedRequest.email || 'N/A' }}
                 </a>
               </div>
@@ -437,7 +437,7 @@
           <a
             v-if="selectedRequest.phone"
             :href="'tel:' + selectedRequest.phone"
-            class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-xs font-semibold"
+            class="px-3 py-1.5 bg-primary-50 text-primary-dark hover:bg-primary-100 rounded-lg text-xs font-semibold"
           >
             📞 Call Parent
           </a>
@@ -593,7 +593,7 @@ export default {
         case "Pending":
           return "bg-amber-50 text-amber-700 border-amber-200/80";
         case "In Review":
-          return "bg-blue-50 text-blue-700 border-blue-200/80";
+          return "bg-primary-50 text-primary-dark border-primary-200/80";
         case "Approved":
           return "bg-purple-50 text-purple-700 border-purple-200/80";
         case "Refunded":

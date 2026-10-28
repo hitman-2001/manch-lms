@@ -12,7 +12,7 @@
         <div class="flex items-center gap-3">
           <button
             @click="fetchRegistrations"
-            class="px-4 py-2 text-xs font-medium text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors flex items-center gap-1.5"
+            class="px-4 py-2 text-xs font-medium text-primary-dark hover:text-primary-dark bg-primary-50 hover:bg-primary-100 rounded-xl transition-colors flex items-center gap-1.5"
           >
             <svg class="h-3.5 w-3.5 animate-spin-hover" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -34,7 +34,7 @@
             type="text"
             v-model="searchQuery"
             placeholder="Search by student name, phone, email, school, or class..."
-            class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
           />
         </div>
       </div>
@@ -42,7 +42,7 @@
       <!-- Content Area -->
       <!-- Loading State -->
       <div v-if="loading" class="py-12 flex flex-col items-center justify-center">
-        <svg class="animate-spin h-8 w-8 text-blue-600 mb-3" fill="none" viewBox="0 0 24 24">
+        <svg class="animate-spin h-8 w-8 text-primary-dark mb-3" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
         </svg>
@@ -85,9 +85,9 @@
               <td class="px-6 py-4">
                 <div class="font-semibold text-gray-800 text-sm flex items-center gap-1.5">
                   {{ reg.name }}
-                  <span class="inline-block h-2 w-2 rounded-full bg-blue-500" title="MSAT Registered"></span>
+                  <span class="inline-block h-2 w-2 rounded-full bg-primary" title="MSAT Registered"></span>
                 </div>
-                <div class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md text-[10px] font-semibold border border-blue-100">
+                <div class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 bg-primary-50 text-primary-dark rounded-md text-[10px] font-semibold border border-primary-100">
                   Class {{ reg.currentClass || 'N/A' }}
                 </div>
               </td>
@@ -105,7 +105,7 @@
                   <!-- Phone -->
                   <a
                     :href="'tel:' + reg.phone"
-                    class="text-sm text-gray-600 hover:text-blue-600 font-medium flex items-center gap-1.5 w-max"
+                    class="text-sm text-gray-600 hover:text-primary-dark font-medium flex items-center gap-1.5 w-max"
                   >
                     <svg class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -116,7 +116,7 @@
                   <a
                     v-if="reg.email"
                     :href="'mailto:' + reg.email"
-                    class="text-xs text-gray-400 hover:text-blue-600 flex items-center gap-1.5 w-max"
+                    class="text-xs text-gray-400 hover:text-primary-dark flex items-center gap-1.5 w-max"
                   >
                     <svg class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -148,7 +148,7 @@
                   <!-- Details view button -->
                   <button
                     @click="openDetails(reg)"
-                    class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                    class="p-2 text-gray-400 hover:text-primary-dark hover:bg-primary-50 rounded-xl transition-all"
                     title="View details"
                   >
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -183,10 +183,10 @@
     >
       <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden border border-gray-100 animate-in fade-in zoom-in-95 duration-150">
         <!-- Modal Header -->
-        <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-6 py-5 text-white flex items-center justify-between">
+        <div class="bg-gradient-to-r from-primary-700 to-primary-700 px-6 py-5 text-white flex items-center justify-between">
           <div>
             <h3 class="font-bold text-base">MSAT Scholarship Registration</h3>
-            <p class="text-xs text-blue-100 mt-0.5">Registered on {{ formatDate(selectedRegistration.createdAt, true) }}</p>
+            <p class="text-xs text-primary-100 mt-0.5">Registered on {{ formatDate(selectedRegistration.createdAt, true) }}</p>
           </div>
           <button @click="selectedRegistration = null" class="text-white/80 hover:text-white transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -205,7 +205,7 @@
             </div>
             <div>
               <span class="block text-xs font-semibold text-gray-400 uppercase tracking-wide">Current Class</span>
-              <span class="inline-flex items-center mt-1 px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-md text-xs font-semibold border border-blue-100">
+              <span class="inline-flex items-center mt-1 px-2.5 py-0.5 bg-primary-50 text-primary-dark rounded-md text-xs font-semibold border border-primary-100">
                 Class {{ selectedRegistration.currentClass || 'N/A' }}
               </span>
             </div>
@@ -235,7 +235,7 @@
               <!-- Call -->
               <a
                 :href="'tel:' + selectedRegistration.phone"
-                class="flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-100 text-blue-700 text-xs font-semibold rounded-xl transition-colors"
+                class="flex items-center gap-1.5 px-3 py-2 bg-primary-50 hover:bg-primary-100 border border-primary-100 text-primary-dark text-xs font-semibold rounded-xl transition-colors"
               >
                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

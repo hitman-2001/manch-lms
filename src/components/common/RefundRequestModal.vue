@@ -57,7 +57,7 @@
           <!-- Progress Bar Track -->
           <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
             <div
-              class="bg-gradient-to-r from-primary to-blue-600 h-full transition-all duration-300 rounded-full"
+              class="bg-gradient-to-r from-primary to-primary-600 h-full transition-all duration-300 rounded-full"
               :style="{ width: `${(currentStep / 4) * 100}%` }"
             ></div>
           </div>
@@ -314,7 +314,7 @@
                   </div>
                 </div>
 
-                <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100/70 text-[11px] text-gray-600">
+                <div class="p-3 bg-primary-50/50 rounded-xl border border-primary-100/70 text-[11px] text-gray-600">
                   ℹ️ Institute cancellation and refund updates will be communicated to this phone and email.
                 </div>
               </div>
