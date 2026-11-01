@@ -3,6 +3,7 @@
     <HeroCarousel />
     <CourseCardsSection />
     <AboutPreview />
+    <TestimonialsSection />
     <AdmissionCTA />
   </div>
 </template>
@@ -11,11 +12,18 @@
 import HeroCarousel from "../components/home/HeroCarousel.vue";
 import AboutPreview from "../components/home/AboutPreview.vue";
 import CourseCardsSection from "../components/home/CourseCardsSection.vue";
+import TestimonialsSection from "../components/home/TestimonialsSection.vue";
 import AdmissionCTA from "../components/home/AdmissionCTA.vue";
 
 export default {
   name: "HomePage",
-  components: { HeroCarousel, AboutPreview, CourseCardsSection, AdmissionCTA },
+  components: {
+    HeroCarousel,
+    AboutPreview,
+    CourseCardsSection,
+    TestimonialsSection,
+    AdmissionCTA,
+  },
 };
 </script>
 
