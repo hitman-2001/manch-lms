@@ -20,6 +20,8 @@
           :category="course.category"
           :description="course.description"
           :points="course.points"
+          :enquiry-url="course.enquiryUrl"
+          :enquiry-text="course.enquiryText"
         />
       </div>
     </div>
@@ -37,6 +39,21 @@ export default {
   data() {
     return {
       courses: [
+        {
+          title: "Manch Board Champions 2027",
+          tag: "SSC Test Series",
+          category: "Class 10 | State Board",
+          description: "Exclusive 30-Paper Maharashtra State Board Test Series designed to eliminate exam fear, master board-pattern answer presentation, and identify mistakes before finals.",
+          points: [
+            "<strong>30 Full-Length Board-Pattern Papers</strong> with verified Model Answer Keys",
+            "<strong>₹1,999 – Practice Series:</strong> 30 Board-Pattern Test Papers + Model Answers",
+            "<strong>₹2,999 – Evaluated Series ⭐:</strong> 30 Papers + Expert Answer Correction + Marks & Feedback",
+            "<strong>₹5,999 – Mentorship Series:</strong> Full Evaluation + Scheduled Doubt Sessions + Personal Mentorship",
+            "<strong>Tests Begin:</strong> November 2026 across Vasai East, Vasai West & Nallasopara West (Open for all students)"
+          ],
+          enquiryUrl: "https://forms.gle/nLTSa4HtEhn3BEG27",
+          enquiryText: "Enquire / Register Now"
+        },
         {
           title: "8th - 10th Foundation",
           tag: "Foundation Batch",

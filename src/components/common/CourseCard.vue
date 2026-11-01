@@ -35,18 +35,31 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
             </svg>
           </span>
-          <span>{{ point }}</span>
+          <span v-html="point"></span>
         </li>
       </ul>
     </div>
     
     <!-- Action Button -->
     <div class="px-6 md:px-8 pb-6 md:pb-8 mt-auto">
+      <a 
+        v-if="isExternalLink"
+        :href="enquiryUrl" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-4 rounded-xl font-bold transition-all hover:shadow-lg hover:shadow-primary/25 text-xs md:text-sm tracking-wider uppercase text-center flex items-center justify-center gap-2 group"
+      >
+        <span>{{ enquiryText }}</span>
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
       <router-link 
-        to="/admission" 
+        v-else
+        :to="enquiryUrl || '/admission'" 
         class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-4 rounded-xl font-bold transition-all hover:shadow-lg hover:shadow-primary/25 text-xs md:text-sm tracking-wider uppercase text-center block"
       >
-        Enquire Details
+        {{ enquiryText }}
       </router-link>
     </div>
   </div>
@@ -60,12 +73,19 @@ export default {
     tag: { type: String, default: 'General' },
     category: { type: String, default: 'Coaching' },
     description: { type: String, default: 'Excellent academic programs tailored for success.' },
-    points: { type: Array, required: true }
+    points: { type: Array, required: true },
+    enquiryUrl: { type: String, default: '' },
+    enquiryText: { type: String, default: 'Enquire Details' }
   },
   computed: {
+    isExternalLink() {
+      return typeof this.enquiryUrl === 'string' && /^https?:\/\//i.test(this.enquiryUrl);
+    },
     tagColorClass() {
-      const lowerTag = this.tag.toLowerCase();
-      if (lowerTag.includes('foundation')) {
+      const lowerTag = (this.tag || '').toLowerCase();
+      if (lowerTag.includes('champions') || lowerTag.includes('test series')) {
+        return 'bg-amber-50 text-amber-700 border border-amber-200';
+      } else if (lowerTag.includes('foundation')) {
         return 'bg-primary-50 text-primary-dark border border-primary-100';
       } else if (lowerTag.includes('board')) {
         return 'bg-emerald-50 text-emerald-600 border border-emerald-100';
