@@ -40,7 +40,9 @@
         @touchstart="handleTouchStart"
         @touchend="handleTouchEnd"
       >
-      <div class="relative aspect-[1812/868] overflow-hidden rounded-xl border border-primary-200/60 bg-primary-100 shadow-sm">
+      <div
+        class="relative aspect-[1812/868] overflow-hidden rounded-xl border border-primary-200/60 bg-primary-100 shadow-sm"
+      >
         <div
           v-for="(slide, index) in slides"
           :key="index"
@@ -53,7 +55,8 @@
         >
           <img
             :src="slide.image"
-            class="h-full w-full object-contain"
+            class="block h-full w-full object-cover"
+            :style="{ objectPosition: slide.position || 'center' }"
             :alt="'Manch Science Classes banner ' + (index + 1)"
             width="1812"
             height="868"
@@ -142,19 +145,24 @@ export default {
           image: new URL("../../assets/carousel/slide7.jpg?v=5", import.meta.url).href,
         },
         {
-          image: new URL("../../assets/carousel/slide8.jpg?v=5", import.meta.url).href,
+          image: new URL("../../assets/carousel/slide8-matched.svg", import.meta.url).href,
+          position: 'center 30%',
         },
         {
-          image: new URL("../../assets/carousel/slide9.jpg?v=5", import.meta.url).href,
+          image: new URL("../../assets/carousel/slide9-matched.svg", import.meta.url).href,
+          position: 'center 30%',
         },
         {
-          image: new URL("../../assets/carousel/slide10.jpg?v=5", import.meta.url).href,
+          image: new URL("../../assets/carousel/slide10.jpg?v=6", import.meta.url).href,
+          position: 'center 30%',
         },
         {
-          image: new URL("../../assets/carousel/slide11.jpg?v=5", import.meta.url).href,
+          image: new URL("../../assets/carousel/slide11.jpg?v=6", import.meta.url).href,
+          position: 'center 30%',
         },
         {
-          image: new URL("../../assets/carousel/slide12.jpg?v=5", import.meta.url).href,
+          image: new URL("../../assets/carousel/slide12.jpg?v=6", import.meta.url).href,
+          position: 'center 30%',
         },
       ],
     };
